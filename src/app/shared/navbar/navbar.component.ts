@@ -8,10 +8,16 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent {
   desktopVersion: boolean = false;
-  obvs = new Observable<boolean>(
-    if (matchMedia("(max-width: 700px)"))
-  )
+  obvs = new Observable<boolean>(observer =>
+    observer =  matchMedia("(max-width: 768px)").onchange(eve => observer)
+    )
+
+  
   constructor() {}
 
+  changeVersion(): boolean {
+    const mediaQuery: MediaQueryList  = matchMedia("(max-width: 768px)")
+    return mediaQuery.matches
+  }
 
 }

@@ -1,6 +1,6 @@
-<ng-container *ngIf="desktopVersion; else mobileVersion">
-    <app-navbar-desktop></app-navbar-desktop>
+<ng-container *ngIf="changeVersion(); else mobileVersion">
+    <app-navbar-mobile></app-navbar-mobile>
 </ng-container>
 <ng-template #mobileVersion>
-    <app-navbar-mobile></app-navbar-mobile>
+    <app-navbar-desktop></app-navbar-desktop>
 </ng-template>

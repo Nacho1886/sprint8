@@ -21,13 +21,13 @@ body {
 }
 
 body {
-    background-image: url(https://lumiere-a.akamaihd.net/v1/images/background-stars-mobile_338a9d3c.jpeg?region=0%2C0%2C640%2C1000);
+    background-image: url(./assets/img/background-stars-mobile.jpeg);
     background-size: 768px auto;
 }
 
 @media screen and (min-width: 768px) {
     body {
-        background-image: url(https://lumiere-a.akamaihd.net/v1/images/background-stars-desktop_00cbf8a9.jpeg?region=0%2C0%2C2048%2C1600);
+        background-image: url(./assets/img/background-stars-desktop.jpeg);
         background-size: 1600px auto;
     }
 
