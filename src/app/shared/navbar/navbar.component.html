@@ -1,6 +1,8 @@
-<ng-container *ngIf="desktopVersion; else mobileVersion">
-    <app-navbar-desktop></app-navbar-desktop>
-</ng-container>
-<ng-template #mobileVersion>
-    <app-navbar-mobile></app-navbar-mobile>
-</ng-template>
+<div #boxContainer>
+    <ng-container *ngIf="desktopVersion | async; else mobileVersion">
+        <app-navbar-desktop></app-navbar-desktop>
+    </ng-container>
+    <ng-template #mobileVersion>
+        <app-navbar-mobile></app-navbar-mobile>
+    </ng-template>
+</div>
