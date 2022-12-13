@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { DisplayService } from '../../services/display.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,17 +7,23 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  desktopVersion: boolean = false;
-  obvs = new Observable<boolean>(observer =>
-    observer =  matchMedia("(max-width: 768px)").onchange(eve => observer)
-    )
+  desktopVersion!: boolean
 
   
-  constructor() {}
+  constructor(private displayService: DisplayService) {
+    this.displayService.observer.observe()
+    
+  }
 
-  changeVersion(): boolean {
-    const mediaQuery: MediaQueryList  = matchMedia("(max-width: 768px)")
-    return mediaQuery.matches
+  /* changeVersion() {
+    return this.version$.asObservable()
+  } */
+  
+  ngOnInit(): void {
+    this.displayService.changeVersion()
+    console.log(matchMedia("(max-width: 768px)"));
+    // console.log(onresize());
+    
   }
 
 }
