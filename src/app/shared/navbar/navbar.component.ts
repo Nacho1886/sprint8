@@ -1,5 +1,5 @@
 import { emitDistinctChangesOnlyDefaultValue } from '@angular/compiler';
-import { Component, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { SafeSubscriber } from 'rxjs/internal/Subscriber';
 
@@ -9,27 +9,29 @@ import { SafeSubscriber } from 'rxjs/internal/Subscriber';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-
-  desktopVersion!: EventEmitter = new EventEmitter(true)
+  
+  // @Output() desktopVersion!: boolean;
+  @Output() desktopVersion: EventEmitter<boolean> = new EventEmitter(true)
   @ViewChild('boxContainer') boxContainer!: ElementRef
-
+  
   constructor() { }
-
-
-  ngAfterViewInit(): void {
-    this.desktopVersion = new ResizeObservable(this.boxContainer.nativeElement).subscribe(resized => {
-      const withSize = resized[0].contentRect.width
-      console.log("🚀 ~ file: navbar.component.ts:21 ~ NavbarComponent ~ this.desktopVersion=newResizeObservable ~ withSize", withSize)
-      if (withSize >= 768) new EventEmitter(true)
-      console.log("🚀 ~ file: navbar.component.ts:24 ~ NavbarComponent ~ this.desktopVersion=newResizeObservable ~ new EventEmitter(true)", new EventEmitter())
-      if (withSize >= 768) return true
-      if (withSize <= 768) return false
-      return
-    })
-    
+  onChangeW(elementQ: any) {
+    // elementQ.subscribe((resized: any) => console.log(resized))
+  
+    console.log(elementQ.next());
+    return elementQ
   }
-
+  
+  ngAfterViewInit(): void {
+    new ResizeObservable(this.boxContainer.nativeElement).subscribe(resized => {
+      const withSize = resized[0].contentRect.width
+      if (withSize > 768) this.desktopVersion.emit(true)
+      if (withSize <= 768) this.desktopVersion.emit(false)
+    })
+    this.desktopVersion
+  }
 }
+
 
 
 export class ResizeObservable extends Observable<ResizeObserverEntry[]> {
