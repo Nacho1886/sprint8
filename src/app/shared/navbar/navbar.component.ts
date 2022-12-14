@@ -1,7 +1,6 @@
-import { emitDistinctChangesOnlyDefaultValue } from '@angular/compiler';
-import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { SafeSubscriber } from 'rxjs/internal/Subscriber';
+
+import { Component, HostListener } from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -10,29 +9,58 @@ import { SafeSubscriber } from 'rxjs/internal/Subscriber';
 })
 export class NavbarComponent {
   
-  // @Output() desktopVersion!: boolean;
-  @Output() desktopVersion: EventEmitter<boolean> = new EventEmitter(true)
-  @ViewChild('boxContainer') boxContainer!: ElementRef
+  desktopVersion!: boolean;
+
   
-  constructor() { }
-  onChangeW(elementQ: any) {
-    // elementQ.subscribe((resized: any) => console.log(resized))
-  
-    console.log(elementQ.next());
-    return elementQ
+  constructor() {
+    this.desktopVersion = matchMedia("(min-width: 900px)").matches
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.desktopVersion = this.onChangeVersion(window.innerWidth)
   }
   
-  ngAfterViewInit(): void {
-    new ResizeObservable(this.boxContainer.nativeElement).subscribe(resized => {
-      const withSize = resized[0].contentRect.width
-      if (withSize > 768) this.desktopVersion.emit(true)
-      if (withSize <= 768) this.desktopVersion.emit(false)
-    })
-    this.desktopVersion
+  onChangeVersion(element: any): boolean {
+    const withSize = element
+
+    if (withSize > 900) return true
+    return false
   }
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ngAfterViewInit(): void {
+
+  @ViewChild('boxContainer') boxContainer!: ElementRef
+
+  subscription!: Subscription
+@Output() desktopVersion: EventEmitter<boolean> = new EventEmitter(true)
+
+  this.subscription = new ResizeObservable(this.boxContainer.nativeElement).subscribe(resized => {
+    const withSize = resized[0].contentRect.width
+    if (withSize > 768) this.desktopVersion.emit(true)
+    if (withSize <= 768) this.desktopVersion.emit(false)
+    return
+  })
+  console.log("🚀 ~ file: navbar.component.ts:27 ~ NavbarComponent ~ this.pepe=newResizeObservable ~ this.pepe", this.subscription)
+}
 
 export class ResizeObservable extends Observable<ResizeObserverEntry[]> {
   constructor(elem: HTMLElement) {
@@ -50,3 +78,4 @@ export class ResizeObservable extends Observable<ResizeObserverEntry[]> {
     });
   }
 }
+ */

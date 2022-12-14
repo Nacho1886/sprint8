@@ -1,9 +1,6 @@
-<div #boxContainer>
-    <button (click)="onChangeW(desktopVersion)">pepetryhrwthtdhdrthjrthejuytwrthyrjhwr</button>
-    <ng-container *ngIf="onChangeW(desktopVersion); else mobileVersion">
-        <app-navbar-desktop></app-navbar-desktop>
-    </ng-container>
-    <ng-template #mobileVersion>
-        <app-navbar-mobile></app-navbar-mobile>
-    </ng-template>
-</div>
+<ng-container *ngIf="desktopVersion; else mobileVersion">
+    <app-navbar-desktop></app-navbar-desktop>
+</ng-container>
+<ng-template #mobileVersion>
+    <app-navbar-mobile></app-navbar-mobile>
+</ng-template>
