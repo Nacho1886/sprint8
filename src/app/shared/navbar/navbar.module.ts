@@ -4,6 +4,7 @@ import { NavbarMobileComponent } from './navbar-mobile/navbar-mobile.component';
 import { NavbarDesktopComponent } from './navbar-desktop/navbar-desktop.component';
 import { NavbarComponent } from './navbar.component';
 import { NgprimeModule } from 'src/app/third-modules/ngprime.module';
+import { LoginButtonComponent } from './login-button/login-button.component';
 
 
 
@@ -11,7 +12,8 @@ import { NgprimeModule } from 'src/app/third-modules/ngprime.module';
   declarations: [
     NavbarComponent,
     NavbarDesktopComponent,
-    NavbarMobileComponent
+    NavbarMobileComponent,
+    LoginButtonComponent
   ],
   imports: [
     CommonModule,

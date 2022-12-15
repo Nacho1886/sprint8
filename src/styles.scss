@@ -12,6 +12,8 @@ only screen and (min-resolution: 1.3dppx) {}
 /* page background images and color settings */
 body {
     background-color: #000000;
+    margin: 0;
+    padding: 0;
 }
 
 body > * {
@@ -32,6 +34,6 @@ body {
 @media screen and (min-width: 768px) {
     body {
         background-image: url(./assets/img/background-stars-desktop.jpeg);
-        background-size: 1600px auto;
+        background-size: auto;
     }
 }

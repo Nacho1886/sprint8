@@ -1,4 +1,4 @@
-<div class="h-5rem row">
+<div class="h-3.9rem row">
     <div id="container">
         <div id="burger" (click)="hamburgerMenu($event)">
             <div class="bun top"></div>
@@ -8,20 +8,20 @@
         <nav #navMobile>
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a routerLink="/home">Home</a>
                 </li>
-                <li class="green">
+<!--                 <li class="green">
                     <a href="#">Jedi</a>
-                </li>
+                </li> -->
                 <li class="red">
-                    <a href="#">Sith</a>
+                    <a routerLink="/starships">Starships</a>
                 </li>
-                <li class="yellow">
+<!--                 <li class="yellow">
                     <a href="#">Sentinel</a>
                 </li>
                 <li class="purple">
                     <a href="#">Samuel L. Jackson</a>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </div>

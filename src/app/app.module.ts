@@ -5,10 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { StarshipsModule } from './starships/starships.module';
-import { NavbarModule } from './shared/navbar/navbar.module';
 import { ErrorPageModule } from './error-page/error-page.module';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    NavbarModule,
+    SharedModule,
     ErrorPageModule,
     HomeModule,
     StarshipsModule
