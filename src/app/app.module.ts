@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { StarshipsModule } from './starships/starships.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
+import { ErrorPageModule } from './error-page/error-page.module';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { NavbarModule } from './shared/navbar/navbar.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     NavbarModule,
+    ErrorPageModule,
     HomeModule,
     StarshipsModule
   ],

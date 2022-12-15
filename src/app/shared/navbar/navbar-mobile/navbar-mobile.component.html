@@ -1,26 +1,29 @@
-<div id="container">
-    <div id="burger" (click)="hamburgerMenu($event)">
-        <div class="bun top"></div>
-        <div class="filling"></div>
-        <div class="bun bottom"></div>
+<div class="h-5rem row">
+    <div id="container">
+        <div id="burger" (click)="hamburgerMenu($event)">
+            <div class="bun top"></div>
+            <div class="filling"></div>
+            <div class="bun bottom"></div>
+        </div>
+        <nav #navMobile>
+            <ul>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li class="green">
+                    <a href="#">Jedi</a>
+                </li>
+                <li class="red">
+                    <a href="#">Sith</a>
+                </li>
+                <li class="yellow">
+                    <a href="#">Sentinel</a>
+                </li>
+                <li class="purple">
+                    <a href="#">Samuel L. Jackson</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <nav #navMobile>
-        <ul>
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li class="green">
-                <a href="#">Jedi</a>
-            </li>
-            <li class="red">
-                <a href="#">Sith</a>
-            </li>
-            <li class="yellow">
-                <a href="#">Sentinel</a>
-            </li>
-            <li class="purple">
-                <a href="#">Samuel L. Jackson</a>
-            </li>
-        </ul>
-    </nav>
+    <div class="col-6 col-offset-3"><img src="../../../../assets/img/sw_little_logo.png" alt="littleLogo"></div>
 </div>
