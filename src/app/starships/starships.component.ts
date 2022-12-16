@@ -14,6 +14,9 @@ export class StarshipsComponent implements OnInit {
   constructor( private apiRequests: ApiRequestsService ) { 
     this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray =  page.results)
   }
+
+  getStarship = this.apiRequests.getStarshipApi
+
   ngOnInit(): void {
   }
 
