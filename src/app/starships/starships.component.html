@@ -1,0 +1,10 @@
+<ng-container *ngIf="starshipsArray; else elseTemplate">
+    <div *ngFor="let starship of starshipsArray">
+        <p>{{starship.name}}</p>
+        <p>{{starship.model}}</p>
+    </div>
+    
+</ng-container>
+<ng-template #elseTemplate>
+    Pepote
+</ng-template>

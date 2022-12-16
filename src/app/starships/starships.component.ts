@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRequestsService } from './services/api-requests.service';
+import { Starship } from './interfaces/Starship';
 
 @Component({
   selector: 'app-starships',
@@ -8,7 +9,10 @@ import { ApiRequestsService } from './services/api-requests.service';
 })
 export class StarshipsComponent implements OnInit {
 
-  constructor(private apiRequests: ApiRequestsService) { 
+  starshipsArray!: Starship[]
+
+  constructor( private apiRequests: ApiRequestsService ) { 
+    this.apiRequests.starshipsPageApi.subscribe(page => this.starshipsArray =  page.results)
   }
   ngOnInit(): void {
   }
