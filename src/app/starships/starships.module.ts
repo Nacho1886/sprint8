@@ -7,6 +7,7 @@ import { StarshipsComponent } from './starships.component';
 @NgModule({
   declarations: [
     StarshipsComponent
+
   ],
   imports: [
     CommonModule

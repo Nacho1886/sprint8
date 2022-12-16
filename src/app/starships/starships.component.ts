@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiRequestsService } from './services/api-requests.service';
 
 @Component({
   selector: 'app-starships',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StarshipsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private apiRequests: ApiRequestsService) { 
+  }
   ngOnInit(): void {
   }
 
