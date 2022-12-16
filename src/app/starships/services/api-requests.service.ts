@@ -12,7 +12,10 @@ export class ApiRequestsService {
     
   }
 
-  get starshipsPageApi(): Observable<StarshipsPage> {
+  getStarshipsPageApi(): Observable<StarshipsPage> {
     return this.http.get<StarshipsPage>('https://swapi.dev/api/starships/')
+  }
+  getStarshipApi(url: string): Observable<StarshipsPage> {
+    return this.http.get<StarshipsPage>(url)
   }
 }

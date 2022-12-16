@@ -12,7 +12,7 @@ export class StarshipsComponent implements OnInit {
   starshipsArray!: Starship[]
 
   constructor( private apiRequests: ApiRequestsService ) { 
-    this.apiRequests.starshipsPageApi.subscribe(page => this.starshipsArray =  page.results)
+    this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray =  page.results)
   }
   ngOnInit(): void {
   }
