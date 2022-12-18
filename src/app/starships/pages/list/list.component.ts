@@ -15,4 +15,8 @@ export class ListComponent {
     this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray =  page.results)
   }
 
+
+  getStarship(url: string){
+    this.apiRequests.getStarshipApi(url).subscribe(observer => console.log(observer))
+  }
 }

@@ -1,7 +1,7 @@
 <ng-container *ngIf="starshipsArray; else elseTemplate">
     <div class="grid m-2">
         <div class="col-12 md:col-6 lg:col-3" *ngFor="let starship of starshipsArray">
-            <app-starship-card [starship]="starship"></app-starship-card>
+            <app-starship-card [starship]="starship" (click)="getStarship(starship.url)"></app-starship-card>
         </div>
     </div>
 </ng-container>
