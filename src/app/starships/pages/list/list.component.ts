@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Starship } from '../../interfaces/Starship';
+import { ApiRequestsService } from '../../services/api-requests.service';
 
 @Component({
   selector: 'app-list',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
+
+  starshipsArray!: Starship[]
+
+  constructor( private apiRequests: ApiRequestsService ) { 
+    this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray =  page.results)
+  }
 
 }

@@ -1,23 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiRequestsService } from './services/api-requests.service';
-import { Starship } from './interfaces/Starship';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-starships',
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss']
 })
-export class StarshipsComponent implements OnInit {
+export class StarshipsComponent {
 
-  starshipsArray!: Starship[]
-
-  constructor( private apiRequests: ApiRequestsService ) { 
-    this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray =  page.results)
-  }
-
-  getStarship = this.apiRequests.getStarshipApi
-
-  ngOnInit(): void {
-  }
-
+  constructor() { }
 }

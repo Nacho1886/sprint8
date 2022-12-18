@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './pages/list/list.component';
 import { FileComponent } from './pages/file/file.component';
 import { StarshipsRoutingModule } from './starships-routing.module';
+import { StarshipCardComponent } from './components/starship-card/starship-card.component';
 
 
 
@@ -13,7 +14,8 @@ import { StarshipsRoutingModule } from './starships-routing.module';
   declarations: [
     StarshipsComponent,
     ListComponent,
-    FileComponent
+    FileComponent,
+    StarshipCardComponent
 
   ],
   imports: [
