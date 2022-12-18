@@ -1,7 +1,8 @@
 <ng-container *ngIf="starshipsArray; else elseTemplate">
-    <div class="grid">
-        <div *ngFor="let starship of starshipsArray">
-            <p-card (click)="getStarship(starship.url)" header="{{starship.name}}" [style]="{'width': '25rem', 'margin-bottom': '2em'}" styleClass="p-card-shadow">
+    <div class="grid m-2">
+        <div class="col-12 md:col-6 lg:col-3" *ngFor="let starship of starshipsArray">
+            <p-card [style]="{'height': '100%'}" class="cursor-pointer"
+            header="{{starship.name}}" styleClass="p-card-shadow" (click)="getStarship(starship.url)">
                 <ng-template pTemplate="header">
                     <br>
                 </ng-template>
