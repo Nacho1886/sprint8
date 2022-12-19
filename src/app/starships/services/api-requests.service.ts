@@ -14,9 +14,14 @@ export class ApiRequestsService {
   urlStarshipsApi: string = 'https://swapi.dev/api/starships/'
   page: number = 1
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) { }
 
   getStarshipsPageApi(): Observable<StarshipsPage> {
+    // this.router.navigate([this.urlStarshipsApi],{ queryParams: { page: this.page }})
+    // return this.http.get<StarshipsPage>(    this.router.navigateByUrl([this.urlStarshipsApi],{ queryParams: { page: this.page }}))
     return this.http.get<StarshipsPage>(this.urlStarshipsApi + '?page=' + this.page)
   }
 

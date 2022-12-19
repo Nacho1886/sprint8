@@ -16,7 +16,7 @@ export class ListComponent {
     private apiRequests: ApiRequestsService,
     private route: ActivatedRoute
     ) { 
-    this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray =  page.results)
+    this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray = page.results)
   }
 
 
