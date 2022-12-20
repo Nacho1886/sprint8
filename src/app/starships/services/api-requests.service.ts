@@ -20,12 +20,10 @@ export class ApiRequestsService {
     ) { }
 
   getStarshipsPageApi(): Observable<StarshipsPage> {
-    // this.router.navigate([this.urlStarshipsApi],{ queryParams: { page: this.page }})
-    // return this.http.get<StarshipsPage>(    this.router.navigateByUrl([this.urlStarshipsApi],{ queryParams: { page: this.page }}))
     return this.http.get<StarshipsPage>(this.urlStarshipsApi + '?page=' + this.page)
   }
 
-  getStarshipApi(url: string): Observable<Starship> {
-    return this.http.get<Starship>(url)
+  getStarshipApi(id: string): Observable<Starship> {
+    return this.http.get<Starship>(this.urlStarshipsApi + id)
   }
 }

@@ -13,17 +13,18 @@ export class ListComponent {
   starshipsArray!: Starship[]
 
   constructor(
-    private apiRequests: ApiRequestsService,
-    private route: ActivatedRoute
+    private apiRequestsService: ApiRequestsService,
+    private activatedRoute: ActivatedRoute
     ) { 
-    this.apiRequests.getStarshipsPageApi().subscribe(page => this.starshipsArray = page.results)
+    this.apiRequestsService.getStarshipsPageApi().subscribe(page => this.starshipsArray = page.results)
   }
 
 
-  getStarship(url: string){
+  getStarship(url: string) {
     
-    this.route.fragment.subscribe(obs => console.log(obs)
-    )
-    this.apiRequests.getStarshipApi(url).subscribe(observer => console.log(observer))
+    this.activatedRoute.params.subscribe(obs => console.log(obs))
+    // this.activatedRoute.fragment.subscribe(obs => console.log(obs))
+
+    this.apiRequestsService.getStarshipApi(url).subscribe(observer => console.log(observer))
   }
 }
