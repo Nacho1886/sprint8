@@ -11,7 +11,9 @@ import { Starship } from '../interfaces/Starship';
 })
 export class ApiRequestsService {
 
-  urlStarshipsApi: string = 'https://swapi.dev/api/starships/'
+  urlStarshipsApi:        string = 'https://swapi.dev/api/starships/'
+  urlImagesStarshipsApi:  string = 'https://starwars-visualguide.com/assets/img/starships/'
+  myUrlStarshipsApi:      string = 'https://starships-star-wars-default-rtdb.europe-west1.firebasedatabase.app/starships/'
   page: number = 1
 
   constructor(
@@ -26,4 +28,9 @@ export class ApiRequestsService {
   getStarshipApi(id: string): Observable<Starship> {
     return this.http.get<Starship>(this.urlStarshipsApi + id)
   }
+
+  getImageStarshipApi(id: string): Observable<string> {
+    return this.http.get<string>(this.myUrlStarshipsApi + id)
+  }
 }
+//this.http.get<string>(this.urlImagesStarshipsApi + id + '.jpg') || 
