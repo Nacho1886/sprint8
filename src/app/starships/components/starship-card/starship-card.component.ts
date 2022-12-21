@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Starship } from '../../interfaces/Starship';
+import { Starship } from '../../interfaces/starship';
 import { ApiRequestsService } from '../../services/api-requests.service';
 
 @Component({
