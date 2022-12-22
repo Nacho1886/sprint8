@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiRequestsService } from '../../services/api-requests.service';
-import { Starship } from '../../interfaces/Starship';
+import { Starship } from '../../interfaces/starship';
 import { switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

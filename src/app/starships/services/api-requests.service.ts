@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { StarshipsPage } from '../interfaces/StarshipsPage';
-import { Starship } from '../interfaces/Starship';
+import { StarshipsPage } from '../interfaces/starshipsPage';
+import { Starship } from '../interfaces/starship';
 
 @Injectable({
   providedIn: 'root'
