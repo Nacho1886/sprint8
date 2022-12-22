@@ -1,29 +1,26 @@
 {
-	"name": "Luke Skywalker",
-	"height": "172",
-	"mass": "77",
-	"hair_color": "blond",
-	"skin_color": "fair",
-	"eye_color": "blue",
-	"birth_year": "19BBY",
-	"gender": "male",
-	"homeworld": "https://swapi.dev/api/planets/1/",
-	"films": [
-		"https://swapi.dev/api/films/1/",
-		"https://swapi.dev/api/films/2/",
-		"https://swapi.dev/api/films/3/",
-		"https://swapi.dev/api/films/6/"
-	],
-	"species": [],
-	"vehicles": [
-		"https://swapi.dev/api/vehicles/14/",
-		"https://swapi.dev/api/vehicles/30/"
-	],
-	"starships": [
-		"https://swapi.dev/api/starships/12/",
-		"https://swapi.dev/api/starships/22/"
-	],
-	"created": "2014-12-09T13:50:51.644000Z",
-	"edited": "2014-12-20T21:17:56.891000Z",
-	"url": "https://swapi.dev/api/people/1/"
+  "users": {
+    "id": 2,
+    "name": "pepe"
+  },
+  "starshipsImage": {
+    "2": {"url": "https://static.wikia.nocookie.net/starwars/images/0/0b/BLOC01AB.jpg/revision/latest/scale-to-width-down/592?cb=20070516205643"},
+    "3": "https://static.wikia.nocookie.net/starwars/images/6/64/ISD-1-SV.png/revision/latest?cb=20220404051016",
+    "5": "https://starwars-visualguide.com/assets/img/starships/5.jpg",
+    "9": "https://starwars-visualguide.com/assets/img/starships/9.jpg",
+    "17": "https://4.bp.blogspot.com/-aDB79v_b9w4/V7C8wfnNE7I/AAAAAAAAKyc/IKA6VrxOlfYq0ns2KVhTWBu_60_ihb6bACLcB/s1600/Rebel_transport_box_art.jpg",
+    "32": "https://static.wikia.nocookie.net/star-wars-canon/images/7/7f/Procurer-SOR.png/revision/latest?cb=20171225142637",
+    "49": "https://i.pinimg.com/originals/2b/48/37/2b483743a84256809a2db04523bdc7ca.jpg",
+    "52": "http://images2.wikia.nocookie.net/__cb20080721224322/starwars/images/e/ec/Venator_clonewars.jpg",
+    "58": "https://static.wikia.nocookie.net/starwars/images/1/10/CountDookusSolarSailer-WotF.png/revision/latest/scale-to-width-down/500?cb=20200518063614",
+    "59": "https://swrpggm.com/wp-content/uploads/2021/02/Providence_FE.png",
+    "61": "https://cdnb.artstation.com/p/assets/images/images/011/213/673/large/tyler-harris-vadertransport.jpg?1528395146",
+    "63": "https://static.wikia.nocookie.net/starwars/images/e/ec/Venator_clonewars.jpg/revision/latest/scale-to-width-down/500?cb=20110918171254",
+    "64": "http://4.bp.blogspot.com/-ng4SlSfCjfw/TcbEYT5uTgI/AAAAAAAANM4/ePt-wX7UfRo/s400/Star%2BSkiff%2B2c%25C3%25B3pia.jpg",
+    "65": "https://preview.redd.it/o4615hidk8j11.png?width=960&crop=smart&auto=webp&s=9d33fd61ea36cff2f0b2277c2bba1429ae3ad119",
+    "66": "https://static.wikia.nocookie.net/esstarwars/images/3/32/Starfigher.jpg/revision/latest/scale-to-width-down/1000?cb=20120429113036",
+    "68": "https://swrpggm.com/wp-content/uploads/2021/02/Munificent_FE.png",
+    "74": "https://i.pinimg.com/originals/2d/8d/ae/2d8dae9a5e583ed18551df80495f139c.jpg",
+    "75": "https://i.ytimg.com/vi/Ur6kOgo0y7g/maxresdefault.jpg"
+  }
 }
