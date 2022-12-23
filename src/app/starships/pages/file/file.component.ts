@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiRequestsService } from '../../services/api-requests.service';
 import { Starship } from '../../interfaces/starship';
 import { switchMap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-file',
@@ -18,7 +17,7 @@ export class FileComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiRequestsService: ApiRequestsService,
-    private http: HttpClient
+
     ) {
       
     }
@@ -37,9 +36,10 @@ export class FileComponent {
 
     this.activatedRoute.params.pipe(
       switchMap(({id}) => this.apiRequestsService.getImageStarshipApi(id))
-    ).subscribe( url => {
-      this.starshipImage = url 
-      console.log(url)}
+    ).subscribe( obj => {
+      this.starshipImage = obj.url
+      console.log("🚀 ~ file: file.component.ts:42 ~ FileComponent ~ ngOnInit ~ this.starshipImage", this.starshipImage)
+      }
     )
   }
 }

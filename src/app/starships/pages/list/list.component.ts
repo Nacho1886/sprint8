@@ -6,25 +6,23 @@ import { ApiRequestsService } from '../../services/api-requests.service';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-
-  starshipsArray!: Starship[]
+  starshipsArray!: Starship[];
 
   constructor(
     private apiRequestsService: ApiRequestsService,
     private activatedRoute: ActivatedRoute
-    ) { 
-    this.apiRequestsService.getStarshipsPageApi().subscribe(page => this.starshipsArray = page.results)
+  ) {
+    this.apiRequestsService
+      .getStarshipsPageApi()
+      .subscribe((page) => (this.starshipsArray = page.results));
   }
 
-
-  getStarship(url: string) {
-    
-    this.activatedRoute.params.subscribe(obs => console.log(obs))
-    // this.activatedRoute.fragment.subscribe(obs => console.log(obs))
-
-    this.apiRequestsService.getStarshipApi(url).subscribe(observer => console.log(observer))
+  getStarship(urlString: string) {
+    const urlArray = new URL(urlString).pathname.split('/')
+    console.log("🚀 ~ file: list.component.ts:25 ~ ListComponent ~ getStarship ~ urlArray", urlArray)
+    const id = urlArray.find(e => Number(e) === typeof Number()))
   }
 }
