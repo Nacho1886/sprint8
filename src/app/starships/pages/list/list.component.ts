@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Starship } from '../../interfaces/starship';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiRequestsService } from '../../services/api-requests.service';
+import { Starship } from '../../interfaces/starship';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +13,7 @@ export class ListComponent {
 
   constructor(
     private apiRequestsService: ApiRequestsService,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {
     this.apiRequestsService
       .getStarshipsPageApi()
@@ -21,8 +21,8 @@ export class ListComponent {
   }
 
   getStarship(urlString: string) {
-    const urlArray = new URL(urlString).pathname.split('/')
-    console.log("🚀 ~ file: list.component.ts:25 ~ ListComponent ~ getStarship ~ urlArray", urlArray)
-    const id = urlArray.find(e => Number(e) === typeof Number()))
+    const urlArray = urlString.split('/').reverse().filter(e => e)
+    const id = urlArray.find(e => !isNaN(Number(e)))
+    this.router.navigate([`/starships/${id}`])
   }
 }

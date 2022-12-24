@@ -7,6 +7,7 @@ import { ListComponent } from './pages/list/list.component';
 import { FileComponent } from './pages/file/file.component';
 import { StarshipsRoutingModule } from './starships-routing.module';
 import { StarshipCardComponent } from './components/starship-card/starship-card.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -20,6 +21,7 @@ import { StarshipCardComponent } from './components/starship-card/starship-card.
   ],
   imports: [
     CommonModule,
+    RouterModule,
     NgprimeModule,
     StarshipsRoutingModule,
     SharedModule,
