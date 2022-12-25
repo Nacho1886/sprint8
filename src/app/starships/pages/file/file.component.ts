@@ -5,6 +5,8 @@ import { switchMap } from 'rxjs';
 import { ApiRequestsService } from '../../services/api-requests.service';
 import { Starship } from '../../interfaces/starship';
 import { StarshipImage } from '../../interfaces/starship-image';
+import { Film } from '../../interfaces/film';
+import { Pilot } from '../../interfaces/pilot';
 
 @Component({
   selector: 'app-file',
@@ -13,9 +15,12 @@ import { StarshipImage } from '../../interfaces/starship-image';
 })
 export class FileComponent {
 
-  starship!: Starship
-  starshipImage!: string
   id!: string
+
+  starship!: Starship
+  starshipImage!: StarshipImage
+  films: Film[] = []
+  pilots: Pilot[] = []
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,17 +30,22 @@ export class FileComponent {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( ({id}) => this.id = id)
 
-    this.apiRequestsService.getStarshipApi(this.id).subscribe( obs => this.starship = obs)
-    this.apiRequestsService.getImageStarshipApi(this.id)
-    .subscribe( obj => {this.starshipImage = obj.url}
+    this.apiRequestsService.getStarshipApi(this.id).subscribe( obs => {
+
+      this.starship = obs
+
+      obs.films.forEach(url => this.apiRequestsService.getFilmApi(url)
+        .subscribe(obs => this.films.push(obs)))
+
+      obs.pilots.forEach(url => this.apiRequestsService.getPilotApi(url)
+        .subscribe(obs => this.pilots.push(obs)))
+    })
+
+    this.apiRequestsService.getImageStarshipApi(this.id).subscribe( obs => {this.starshipImage = obs}
+
+/*     this.apiRequestsService.getFilmApi(starship.films).subscribe( obs => {this.starshipImage = obs}
+
+    this.apiRequestsService.getImageStarshipApi(starship.pilots).subscribe( obs => {this.starshipImage = obs} */
     )
   }
 }
-/* this.activatedRoute.params.pipe(
-  switchMap(({id}) => this.apiRequestsService.getStarshipApi(id))
-).subscribe( obs => this.starship = obs)
-
-this.activatedRoute.params.pipe(
-  switchMap(({id}) => this.apiRequestsService.getImageStarshipApi(id))
-).subscribe( obj => {this.starshipImage = obj.url}
-) */

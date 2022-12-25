@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Film } from '../../../../interfaces/film';
 
 @Component({
   selector: 'app-films',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./films.component.scss']
 })
 export class FilmsComponent {
-  @Input() films!: string[]
+  @Input() films!: Film[]
 }

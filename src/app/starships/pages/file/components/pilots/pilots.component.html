@@ -1,1 +1,8 @@
-<p>pilots works!</p>
+<ng-container *ngIf="pilots; else loading">
+    <div *ngFor="let pilot of pilots">
+        <p>{{pilot.name}}</p>
+    </div>
+</ng-container>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

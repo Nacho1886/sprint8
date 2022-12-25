@@ -1,1 +1,8 @@
-<p>films works!</p>
+<ng-container *ngIf="films; else loading">
+    <div *ngFor="let film of films">
+        <p>{{film.title}}</p>
+    </div>
+</ng-container>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

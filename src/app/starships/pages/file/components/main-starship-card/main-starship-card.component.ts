@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Starship } from '../../../../interfaces/starship';
+import { StarshipImage } from '../../../../interfaces/starship-image';
+import { Film } from '../../../../interfaces/film';
+import { Pilot } from '../../../../interfaces/pilot';
 
 @Component({
   selector: 'app-main-starship-card',
@@ -8,5 +11,7 @@ import { Starship } from '../../../../interfaces/starship';
 })
 export class MainStarshipCardComponent {
   @Input() starship!: Starship
-  @Input() starshipImage!: string
+  @Input() films!: Film[]
+  @Input() pilots!: Pilot[]
+  @Input() starshipImage!: StarshipImage
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Pilot } from '../../../../interfaces/pilot';
 
 @Component({
   selector: 'app-pilots',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./pilots.component.scss']
 })
 export class PilotsComponent {
-  @Input() pilots!: string[]
+  @Input() pilots!: Pilot[]
 }

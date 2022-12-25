@@ -1,6 +1,8 @@
 
 <ng-container *ngIf="starship; else loading">
-    <app-main-starship-card [starship]="starship" [starshipImage]="starshipImage"></app-main-starship-card>
+    <app-main-starship-card 
+    [starship]="starship" [films]="films" [pilots]="pilots" [starshipImage]="starshipImage">
+    </app-main-starship-card>
 </ng-container>
 <ng-template #loading>
     <app-loading></app-loading>

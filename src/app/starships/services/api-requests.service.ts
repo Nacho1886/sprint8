@@ -6,6 +6,8 @@ import { map, Observable, of, switchMap } from 'rxjs';
 import { StarshipsPage } from '../pages/starships-page';
 import { Starship } from '../interfaces/starship';
 import { StarshipImage } from '../interfaces/starship-image';
+import { Film } from '../interfaces/film';
+import { Pilot } from '../interfaces/pilot';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +33,22 @@ export class ApiRequestsService {
   getImageStarshipApi(id: string): Observable<StarshipImage> {
     return this.http.get<StarshipImage>(this.urlStarshipJsonServer + id);
   }
+
+  getFilmApi(url: string): Observable<Film> {
+    return this.http.get<Film>(url);
+  }
+
+  getPilotApi(url: string): Observable<Pilot> {
+    return this.http.get<Pilot>(url);
+  }
 }
+
+
+
+
+
+
+
 
 
 /* (async () => { // Usado para rellenar mi API y así solo usar una
