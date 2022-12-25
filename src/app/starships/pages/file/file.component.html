@@ -1,9 +1,7 @@
 
-<ng-container *ngIf="starship; else elseTemplate">
-    <img [src]="starshipImage" alt="starship">
-    <hr>
-    <h1>{{starship.name}}</h1>
+<ng-container *ngIf="starship; else loading">
+    <app-main-starship-card [starship]="starship" [starshipImage]="starshipImage"></app-main-starship-card>
 </ng-container>
-<ng-template #elseTemplate>
+<ng-template #loading>
     <app-loading></app-loading>
 </ng-template>

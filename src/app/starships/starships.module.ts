@@ -6,8 +6,11 @@ import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './pages/list/list.component';
 import { FileComponent } from './pages/file/file.component';
 import { StarshipsRoutingModule } from './starships-routing.module';
-import { StarshipCardComponent } from './components/starship-card/starship-card.component';
+import { StarshipCardComponent } from './pages/list/components/starship-card/starship-card.component';
 import { RouterModule } from '@angular/router';
+import { MainStarshipCardComponent } from './pages/file/components/main-starship-card/main-starship-card.component';
+import { PilotsComponent } from './pages/file/components/pilots/pilots.component';
+import { FilmsComponent } from './pages/file/components/films/films.component';
 
 
 
@@ -16,7 +19,10 @@ import { RouterModule } from '@angular/router';
     StarshipsComponent,
     ListComponent,
     FileComponent,
-    StarshipCardComponent
+    StarshipCardComponent,
+    MainStarshipCardComponent,
+    PilotsComponent,
+    FilmsComponent
 
   ],
   imports: [

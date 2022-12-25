@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, Observable, of, switchMap } from 'rxjs';
 
-import { StarshipsPage } from '../interfaces/starships-page';
+import { StarshipsPage } from '../pages/starships-page';
 import { Starship } from '../interfaces/starship';
 import { StarshipImage } from '../interfaces/starship-image';
 
