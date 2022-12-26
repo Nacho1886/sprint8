@@ -1,6 +1,13 @@
 <ng-container *ngIf="films; else loading">
-    <div *ngFor="let film of films">
-        <p>{{film.title}}</p>
+    <div class="text-center box p-4" *ngFor="let film of films">
+        <h3 class=" mb-6">{{film.title}} - Episode {{film.episode_id | numberToRoman}}</h3>
+        <hr>
+        <p>{{film.opening_crawl}}</p>
+        <ul>
+            <li>Director: {{film.director}}</li>
+            <li>Producer: {{film.producer}}</li>
+            <li>Release date: {{film.release_date}}</li>
+        </ul>
     </div>
 </ng-container>
 <ng-template #loading>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { map, Observable, of, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { StarshipsPage } from '../pages/starships-page';
 import { Starship } from '../interfaces/starship';
@@ -16,9 +15,9 @@ export class ApiRequestsService {
   urlStarshipsApi:        string = 'https://swapi.dev/api/starships/';
   urlImagesStarshipsApi:  string = 'https://starwars-visualguide.com/assets/img/starships/';
   urlStarshipJsonServer:  string = 'http://localhost:3000/starshipsImage/';
-  page: number = 3;
+  page: number = 1;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   getStarshipsPageApi(): Observable<StarshipsPage> {
     return this.http.get<StarshipsPage>(

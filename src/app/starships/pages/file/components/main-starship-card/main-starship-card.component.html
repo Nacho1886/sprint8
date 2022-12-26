@@ -1,22 +1,35 @@
-
-<div class="flex justify-content-center align-content-center h-full">
-    <p-card [header]="starship.name" [style]="{width: '360px'}" styleClass="p-card-shadow">
+<div class="flex justify-content-center align-content-center mt-5">
+    <p-card class="w-9 md:w-6 text-center" [header]="starship.name" styleClass="p-card-shadow">
         <ng-template pTemplate="header">
             <img [src]="starshipImage.url" alt="starship">
         </ng-template>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
+            repudiandae numquam deserunt
+            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+            quas!</p>
+        <div class="grid m-5">
+            <span class="col-12 md:col-6">Model: {{starship.model}}</span>
+            <span class="col-12 md:col-6">Manufacturer: {{starship.manufacturer}}</span>
+            <span class="col-12 md:col-6">Cost in credits: {{starship.cost_in_credits}}</span>
+            <span class="col-12 md:col-6">Length: {{starship.length}}m</span>
+            <span class="col-12 md:col-6">Atmosphering speed: {{starship.max_atmosphering_speed}}</span>
+            <span class="col-12 md:col-6">Crew: {{starship.crew}}</span>
+        </div>
+        <ng-container *ngIf="pilots.length !== 0 || films.length !== 0; else loading">
             <p-accordion [multiple]="true">
-                <p-accordionTab header="Pilots">
+                <p-accordionTab *ngIf="pilots.length !== 0" header="Pilots">
                     <app-pilots [pilots]="pilots"></app-pilots>
                 </p-accordionTab>
-                <p-accordionTab header="Films">
+                <p-accordionTab *ngIf="films.length !== 0" header="Films">
                     <app-films [films]="films"></app-films>
                 </p-accordionTab>
             </p-accordion>
+        </ng-container>
+        <ng-template #loading>
+            <app-loading></app-loading>
+        </ng-template>
         <ng-template pTemplate="footer">
-            <p-button label="Save" icon="pi pi-check"></p-button>
-            <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+            <p-button label="Return" icon="pi pi-undo" routerLink="starships/list"></p-button>
         </ng-template>
     </p-card>
 </div>

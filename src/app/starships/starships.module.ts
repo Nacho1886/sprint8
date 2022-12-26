@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MainStarshipCardComponent } from './pages/file/components/main-starship-card/main-starship-card.component';
 import { PilotsComponent } from './pages/file/components/pilots/pilots.component';
 import { FilmsComponent } from './pages/file/components/films/films.component';
+import { NumberToRomanPipe } from './pipes/number-to-roman.pipe';
 
 
 
@@ -22,7 +23,8 @@ import { FilmsComponent } from './pages/file/components/films/films.component';
     StarshipCardComponent,
     MainStarshipCardComponent,
     PilotsComponent,
-    FilmsComponent
+    FilmsComponent,
+    NumberToRomanPipe
 
   ],
   imports: [

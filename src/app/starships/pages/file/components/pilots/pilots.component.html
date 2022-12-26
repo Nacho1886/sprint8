@@ -1,6 +1,13 @@
 <ng-container *ngIf="pilots; else loading">
-    <div *ngFor="let pilot of pilots">
-        <p>{{pilot.name}}</p>
+    <div class="text-center box p-4" *ngFor="let pilot of pilots">
+        <h3 class=" mb-6">{{pilot.name}}</h3>
+        <hr>
+        <ul>
+            <li>Height: {{pilot.height}}</li>
+            <li>Mass: {{pilot.mass}}</li>
+            <li>Gender: {{pilot.gender}}</li>
+            <li>Birthday year: {{pilot.birth_year}}</li>
+        </ul>
     </div>
 </ng-container>
 <ng-template #loading>
