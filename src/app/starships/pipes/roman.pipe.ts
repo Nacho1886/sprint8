@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'numberToRoman'
+  name: 'roman'
 })
-export class NumberToRomanPipe implements PipeTransform {
+export class romanPipe implements PipeTransform {
 
   transform(num: number) {
     if (isNaN(num)) return NaN;
