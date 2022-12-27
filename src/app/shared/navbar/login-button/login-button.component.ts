@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
@@ -8,38 +8,25 @@ import { MenuItem, MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class LoginButtonComponent {
-  items: MenuItem[]
-  constructor(private messageService: MessageService) {
+  @ViewChild('mainBtn') mainBtn!: ElementRef
+  @ViewChild('options') options!: ElementRef
 
-    this.items = [
-      {
-          icon: 'pi pi-pencil',
-          command: () => {
-              this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-          }
-      },
-      {
-        label: 'pepe',
-        icon: 'pi pi-external-link',
-        url: 'http://angular.io'
+  constructor() { }
+  
+  displayMenu() {
+    this.mainBtn.nativeElement.classList.toggle("clickedMainBtn")
+    this.options.nativeElement.classList.toggle("displayOptions")
+  }
 
-    },
-      {
-          icon: 'pi pi-refresh',
-          command: () => {
-              this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-          }
-      },
-      {
-          icon: 'pi pi-trash',
-          command: () => {
-              this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-          }
-      },
-      {
-          icon: 'pi pi-upload',
-      },
+  ngOnInit(): void {
+    document.addEventListener('click', (event) => {
+      console.log(this.mainBtn.nativeElement);
       
-  ];
+      const condition1 = this.mainBtn.nativeElement.classList.contains("clickedMainBtn")
+      const condition2 = !this.mainBtn.nativeElement.contains(event.target)
+      const condition3 = !this.options.nativeElement.contains(event.target)
+
+      if (condition1 && condition2 && condition3) this.displayMenu()
+    })
   }
 }

@@ -1,0 +1,17 @@
+.fixedNavbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.contentPage {
+    padding-top: 100px;
+}
+
+@media (min-width: 900px) {
+    .contentPage {
+        padding-top: 240px;
+    }
+}

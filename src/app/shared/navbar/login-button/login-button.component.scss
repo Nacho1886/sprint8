@@ -49,6 +49,7 @@ a {
 }
 
 .mainBtn {
+  cursor: pointer;
   z-index: 3;
   background: #af1b1b;
   font-size: 2rem;
@@ -79,6 +80,20 @@ div:hover .mainBtn {
 }
 
 div:hover .options {
+  display: block;
+}
+
+.clickedMainBtn {
+    background: #f7f7f7;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    color: #555;
+    border-color: #555;
+  
+}
+
+.displayOptions {
   display: block;
 }
 
