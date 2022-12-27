@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import {AccordionModule} from 'primeng/accordion';
+import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { SpeedDialModule } from 'primeng/speeddial';
+import { DialogModule } from 'primeng/dialog';
 import { SplitButtonModule } from 'primeng/splitbutton';
-import { ToolbarModule } from 'primeng/toolbar';
 
 
 
@@ -14,10 +13,8 @@ import { ToolbarModule } from 'primeng/toolbar';
     AccordionModule,
     ButtonModule,
     CardModule,
-    SpeedDialModule,
-    SplitButtonModule,
-    ToolbarModule,
-    
+    DialogModule,
+    SplitButtonModule
   ]
 })
 export class NgprimeModule { }

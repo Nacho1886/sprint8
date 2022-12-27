@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarModule } from './navbar/navbar.module';
 import { LoadingComponent } from './loading/loading.component';
-import { LoginModule } from './login/login.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -13,11 +13,11 @@ import { LoginModule } from './login/login.module';
   imports: [
     CommonModule,
     NavbarModule,
-    LoginModule
+    AuthModule
   ],
   exports: [
     NavbarModule,
-    LoginModule,
+    AuthModule,
     LoadingComponent
   ]
 })

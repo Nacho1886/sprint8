@@ -1,11 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login-button',
   templateUrl: './login-button.component.html',
-  styleUrls: ['./login-button.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./login-button.component.scss']
 })
 export class LoginButtonComponent {
   @ViewChild('mainBtn') mainBtn!: ElementRef

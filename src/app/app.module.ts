@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
-import { ErrorPageModule } from './error-page/error-page.module';
 import { StarshipsModule } from './starships/starships.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -21,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    ErrorPageModule,
     HomeModule,
     StarshipsModule
   ],
