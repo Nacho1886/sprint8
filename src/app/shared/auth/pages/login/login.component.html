@@ -1,16 +1,28 @@
-<p-dialog [(visible)]="display" [modal]="true" class="max-w-10rem" [style]="{width: '60vw'}"
-[draggable]="false" [resizable]="false" [dismissableMask]="true">
-<p-header>
-    <div class=" col-offset-1 col-11 text-center">
-        <img class="w-11 mt-3 mb-6" src="../../../../../assets/img/login-logo.png" alt="login-logo">
-        <span [style]="{color: '#edd700'}">ENTER YOUR EMAIL ADDRESS</span>
-    </div>
-</p-header>
-    <form class="grid mt-3 gap-3">
-        <input class="col-12" type="email" placeholder="Email Address">
-        <input class="col-12" type="password">
-        <button class="col-12" pButton pRipple type="submit" label="Continue" class="w-full p-button-raised p-button-secondary p-button-text"></button>
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" [dismissableMask]="true">
+    <p-header>
+        <div class=" col-offset-1 col-11">
+            <img class="w-11 mt-3 mb-5" src="../../../../../assets/img/login-logo.png" alt="login-logo">
+        </div>
+    </p-header>
+    <ng-container *ngIf="!user; else idIsCorrect">
+        <span class="spanText">ENTER YOUR EMAIL ADDRESS</span>
+        <form [formGroup]="emailForm" (ngSubmit)="submitEmail()" class="grid mt-4 gap-3">
+            <input class="col-12" type="email" placeholder="Email Address" formControlName="email">
+            <button class="col-12" pButton pRipple type="submit" label="Continue"
+                class="w-full p-button-raised p-button-secondary p-button-text"></button>
+        </form>
+    </ng-container>
+    <ng-template #idIsCorrect>
+        <span class="flex justify-content-center spanText">ENTER YOUR PASSWORD</span>
+        <p>{{user!.id}}</p>
+    <form class="grid mt-4 gap-3">
+        <input class="col-12" type="password" placeholder="Password">
+        <button class="col-12" pButton pRipple type="submit" label="Sign In"
+            class="w-full p-button-raised p-button-secondary p-button-text"></button>
     </form>
+    </ng-template>
+
+    
 </p-dialog>
 
 <button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show">Continue</button>

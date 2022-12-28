@@ -14,7 +14,7 @@ import { Pilot } from '../interfaces/pilot';
 export class ApiRequestsService {
   urlStarshipsApi:        string = 'https://swapi.dev/api/starships/';
   urlImagesStarshipsApi:  string = 'https://starwars-visualguide.com/assets/img/starships/';
-  urlStarshipJsonServer:  string = 'http://localhost:3000/starshipsImage/';
+  urlJsonServer:  string = 'http://localhost:3000/starshipsImage/';
   page: number = 1;
 
   constructor(private http: HttpClient) {}
@@ -30,7 +30,7 @@ export class ApiRequestsService {
   }
 
   getImageStarshipApi(id: string): Observable<StarshipImage> {
-    return this.http.get<StarshipImage>(this.urlStarshipJsonServer + id);
+    return this.http.get<StarshipImage>(this.urlJsonServer + id);
   }
 
   getFilmApi(url: string): Observable<Film> {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NgprimeModule } from 'src/app/third-modules/ngprime.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { NgprimeModule } from 'src/app/third-modules/ngprime.module';
   ],
   imports: [
     CommonModule,
-    NgprimeModule
+    NgprimeModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoginComponent,

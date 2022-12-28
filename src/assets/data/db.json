@@ -1,5 +1,11 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "pepe@quimote.es",
+      "name": "pepe",
+      "password": "pepote"
+    }
+  ],
   "starshipsImage": [
     {
       "id": 2,
