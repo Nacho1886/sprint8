@@ -1,12 +1,12 @@
-<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" [dismissableMask]="true">
+<p-dialog [visible]="true" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false" [dismissableMask]="true">
     <p-header>
-        <div class=" col-offset-1 col-11">
-            <img class="w-11 mt-3 mb-5" src="../../../../../assets/img/login-logo.png" alt="login-logo">
+        <div class=" col-offset-1 col-10">
+            <img class="w-12 mt-3 mb-5" src="../../../../../assets/img/login-logo.png" alt="login-logo">
         </div>
     </p-header>
-    <ng-container *ngIf="!user; else idIsCorrect">
+    <ng-container *ngIf="!email; else idIsCorrect">
         <span class="spanText">ENTER YOUR EMAIL ADDRESS</span>
-        <form [formGroup]="emailForm" (ngSubmit)="submitEmail()" class="grid mt-4 gap-3">
+        <form [formGroup]="userForm" (ngSubmit)="validateEmail()" class="grid mt-4 gap-3">
             <input class="col-12" type="email" placeholder="Email Address" formControlName="email">
             <button class="col-12" pButton pRipple type="submit" label="Continue"
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>
@@ -14,15 +14,14 @@
     </ng-container>
     <ng-template #idIsCorrect>
         <span class="flex justify-content-center spanText">ENTER YOUR PASSWORD</span>
-        <p>{{user!.id}}</p>
-    <form class="grid mt-4 gap-3">
-        <input class="col-12" type="password" placeholder="Password">
-        <button class="col-12" pButton pRipple type="submit" label="Sign In"
+        <p>{{email}}</p>
+        <form [formGroup]="userForm" (ngSubmit)="validatePassword()" class="grid mt-4 gap-3">
+            <input class="col-12" type="text" placeholder="Password" formControlName="password">
+            <button class="col-12" pButton pRipple type="submit" label="Sign In"
             class="w-full p-button-raised p-button-secondary p-button-text"></button>
-    </form>
+        </form>
     </ng-template>
-
-    
+    <p>{{userForm.value| json}}</p>
 </p-dialog>
 
-<button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show">Continue</button>
+<!-- <button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show">Continue</button> (click)="validateEmail()" -->

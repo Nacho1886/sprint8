@@ -1,8 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { User } from '../../interfaces/user';
+import { Component, OnDestroy, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+
+import { Dialog } from 'primeng/dialog';
+
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -10,29 +13,48 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent {
-  display: boolean = false;
-  user: User | undefined
-  emailForm: FormGroup
+export class LoginComponent implements OnDestroy {
+
+  // display: boolean = true;
+  private _user: User | undefined
+  email: string | undefined
+  userForm: FormGroup
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder,
-    private route: Router
+    private fb: FormBuilder
     ) {
-    this.emailForm = this.fb.group({
-      email: [, Validators.email]
+    this.userForm = this.fb.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]]
     })
+
+    this._user = JSON.parse(localStorage.getItem('User')!)
   }
 
-    showDialog() {
+    /* showDialog() {
         this.display = true;
+    } */
+
+    validateEmail() {
+      const email = this.userForm.value.email
+      this.authService.validateUser(email).subscribe(obs => this.email = obs.id)
+    }
+    validatePassword() {
+      const email = this.userForm.get('email')!.value
+      const password = this.userForm.get('password')!.value
+      this.authService.validateUser(email).subscribe(obs => {
+        if (password === obs.password) {
+          this._user = obs
+          localStorage.setItem('User', JSON.stringify(this._user))
+        }
+      })
     }
 
-    submitEmail() {
-      const email = this.emailForm.value.email
-      this.authService.validateUser(email).subscribe(obs => this.user = obs)
-      if (!this.user) console.log(email);
-      
+  isInvalid(inputName: string) { return this.userForm.controls[inputName].errors }
+
+
+    ngOnDestroy(): void {
+      console.log(this._user)
     }
 }
