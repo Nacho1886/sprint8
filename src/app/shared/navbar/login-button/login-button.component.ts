@@ -1,11 +1,11 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login-button',
   templateUrl: './login-button.component.html',
   styleUrls: ['./login-button.component.scss']
 })
-export class LoginButtonComponent {
+export class LoginButtonComponent implements OnInit {
   @ViewChild('mainBtn') mainBtn!: ElementRef
   @ViewChild('options') options!: ElementRef
 
@@ -18,8 +18,6 @@ export class LoginButtonComponent {
 
   ngOnInit(): void {
     document.addEventListener('click', (event) => {
-      console.log(this.mainBtn.nativeElement);
-      
       const condition1 = this.mainBtn.nativeElement.classList.contains("clickedMainBtn")
       const condition2 = !this.mainBtn.nativeElement.contains(event.target)
       const condition3 = !this.options.nativeElement.contains(event.target)

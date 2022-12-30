@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarModule } from './navbar/navbar.module';
 import { LoadingComponent } from './loading/loading.component';
-import { AuthModule } from './auth/auth.module';
 
 
 
@@ -12,12 +11,10 @@ import { AuthModule } from './auth/auth.module';
   ],
   imports: [
     CommonModule,
-    NavbarModule,
-    AuthModule
+    NavbarModule
   ],
   exports: [
     NavbarModule,
-    AuthModule,
     LoadingComponent
   ]
 })

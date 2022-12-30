@@ -1,11 +1,10 @@
-import { Component, OnDestroy, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ViewContainerRef, ViewEncapsulation, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Dialog } from 'primeng/dialog';
-
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,39 +14,36 @@ import { User } from '../../interfaces/user';
 })
 export class LoginComponent implements OnDestroy {
 
+  @ViewChild('loginDialog') loginDialog!: ElementRef
+
   // display: boolean = true;
-  private _user: User | undefined
   email: string | undefined
   userForm: FormGroup
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
     ) {
     this.userForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]]
     })
-
-    this._user = JSON.parse(localStorage.getItem('User')!)
   }
+
+  closable(): void { this.router.navigate(['/home']) }
 
     /* showDialog() {
         this.display = true;
     } */
 
-    validateEmail() {
-      const email = this.userForm.value.email
-      this.authService.validateUser(email).subscribe(obs => this.email = obs.id)
-    }
-    validatePassword() {
+    
+    validateUser() {
       const email = this.userForm.get('email')!.value
       const password = this.userForm.get('password')!.value
-      this.authService.validateUser(email).subscribe(obs => {
-        if (password === obs.password) {
-          this._user = obs
-          localStorage.setItem('User', JSON.stringify(this._user))
-        }
+      this.authService.validateAccount(email).subscribe(obs => {
+        this.email = obs.id
+        if (password === obs.password) this.authService.userSaved = of(true)
       })
     }
 
@@ -55,6 +51,6 @@ export class LoginComponent implements OnDestroy {
 
 
     ngOnDestroy(): void {
-      console.log(this._user)
+      // console.log(this._user)
     }
 }

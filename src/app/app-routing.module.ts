@@ -8,6 +8,11 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
     path: 'starships',
     loadChildren: () =>
       import('./starships/starships.module').then((m) => m.StarshipsModule),
