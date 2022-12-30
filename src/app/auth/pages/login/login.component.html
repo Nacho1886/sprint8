@@ -10,21 +10,31 @@
         </p-header>
         <ng-container *ngIf="!email; else idIsCorrect">
             <span class="spanText">ENTER YOUR EMAIL ADDRESS</span>
-            <form [formGroup]="userForm" (ngSubmit)="validateUser()" class="grid mt-4 gap-3">
-                <input class="col-12" type="email" placeholder="Email Address" formControlName="email">
-                <button class="col-12" pButton pRipple type="submit" label="Continue"
+            <form [formGroup]="userForm" (ngSubmit)="validateUserId()" class="grid mt-4 gap-3">
+                <input class="col-12"  [style.borderColor]="isInvalidEmail() ? 'red' : null" 
+                type="email" placeholder="Email Address" formControlName="email">
+                <div style="color: 'red'" *ngIf="isInvalidEmail()">
+                    {{ emailErrorMsg }}
+                </div>
+                <button class="col-12" pButton pRipple label="Continue"
                     class="w-full p-button-raised p-button-secondary p-button-text"></button>
             </form>
         </ng-container>
         <ng-template #idIsCorrect>
             <span class="flex justify-content-center spanText">ENTER YOUR PASSWORD</span>
             <p>{{email}}</p>
-            <form [formGroup]="userForm" (ngSubmit)="validateUser()" class="grid mt-4 gap-3">
-                <input class="col-12" type="text" placeholder="Password" formControlName="password">
+            <form [formGroup]="userForm" (ngSubmit)="validateUserAccount()" class="grid mt-4 gap-3">
+                <input class="col-12" [style.borderColor]="isInvalidPassword() ? 'red' : null"
+                type="text" placeholder="Password" formControlName="password" (keyup)="showPasswordMessage = false">
+                <div style="color: 'red'" *ngIf="isInvalidPassword()">
+                        {{ passwordErrorMsg }}
+                </div>
                 <button class="col-12" pButton pRipple type="submit" label="Sign In"
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>
             </form>
         </ng-template>
         <p>{{userForm.value | json}}</p>
+        <p>{{userForm.invalid| json}}</p>
+        <p>{{userForm.controls['password'].errors | json}}</p>
     </p-dialog>
 </div>

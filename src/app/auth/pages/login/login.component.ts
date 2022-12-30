@@ -1,10 +1,9 @@
-import { Component, OnDestroy, ViewChild, ViewContainerRef, ViewEncapsulation, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../interfaces/user';
-import { of } from 'rxjs';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,45 +11,66 @@ import { of } from 'rxjs';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
 
   @ViewChild('loginDialog') loginDialog!: ElementRef
 
-  // display: boolean = true;
   email: string | undefined
   userForm: FormGroup
+  showPasswordMessage: boolean = false
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
-    ) {
+  ) {
     this.userForm = this.fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.pattern(this.authService.emailPattern)]],
+      password: ['', [Validators.required], [this.authService]]
     })
   }
 
   closable(): void { this.router.navigate(['/home']) }
 
-    /* showDialog() {
-        this.display = true;
-    } */
+  get emailErrorMsg(): string {
+    const errors = this.userForm.get('email')?.errors
+    if (errors?.['pattern']) return 'Please enter a valid email address.'
+    return 'Required'
+  }
+  get passwordErrorMsg(): string {
+    const errors = this.userForm.get('password')?.errors
+    if (errors?.['incorrectPassword'])
+      return "The credentials you entered are incorrect. Reminder: passwords are case sensitive."
+    return 'Required'
+  }
 
-    
-    validateUser() {
-      const email = this.userForm.get('email')!.value
+  isInvalidEmail() {
+    if (this.userForm.get('email')?.touched) return this.userForm.controls['email'].errors
+    return null
+  }
+  isInvalidPassword() {
+    if (this.userForm.get('password')?.touched && this.showPasswordMessage)
+      return this.userForm.controls['password'].errors, 1000
+    return null
+  }
+
+
+  validateUserId() {
+    const email = this.userForm.get('email')!.value
+    this.authService.validateEmail(email).subscribe(obs => {
+      this.email = obs.id
+      this.authService.email = obs.id
+    })
+  }
+
+  validateUserAccount() {
+    if (this.userForm.invalid) this.showPasswordMessage = true
+    if (!this.userForm.invalid) {
       const password = this.userForm.get('password')!.value
-      this.authService.validateAccount(email).subscribe(obs => {
-        this.email = obs.id
-        if (password === obs.password) this.authService.userSaved = of(true)
-      })
+      this.authService.validatePassword(this.email!, password).subscribe(obs =>
+        this.authService._user = obs
+      )
+      this.router.navigate(['/home'])
     }
-
-  isInvalid(inputName: string) { return this.userForm.controls[inputName].errors }
-
-
-    ngOnDestroy(): void {
-      // console.log(this._user)
-    }
+  }
 }

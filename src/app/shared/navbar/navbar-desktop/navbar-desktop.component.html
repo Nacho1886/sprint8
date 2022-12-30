@@ -4,7 +4,8 @@
         </div>
         <div class="col-3">
             <div class="flex justify-content-center">
-                <span class="cursor-pointer">
+                <span class="cursor-pointer" *ngIf="user">
+                    {{user['name']}}
                     SIGN OUT
                 </span>
             </div>
