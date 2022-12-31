@@ -10,28 +10,25 @@ import { LocalStorageService } from 'ngx-webstorage';
   styleUrls: ['./navbar-desktop.component.scss']
 })
 export class NavbarDesktopComponent implements OnChanges {
-  @Input() user: User | undefined
-  userData!: Observable<User | undefined>
+  @Input() user!: Observable<User | undefined>
 
 
   constructor(
     private authService: AuthService,
     public localSt: LocalStorageService
-    ) {
-      this.userData = this.authService.userData
-    }
+    ) { }
 
   logout = this.authService.logout
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    if (changes['user']) {
-      console.log(this.userData)
+    /* if (changes['user']) {
+      console.log(this.user)
       
-      this.userData = this.authService.userData
+      this.user = this.authService.user
     }
-    
+     */
   }
   
 }

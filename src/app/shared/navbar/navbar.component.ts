@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class NavbarComponent {
   
   desktopVersion!: boolean;
-  user: User | undefined
+  user: Observable<User | undefined>
   currentValue!: string | null
   
   constructor(private aAuthService: AuthService) {
