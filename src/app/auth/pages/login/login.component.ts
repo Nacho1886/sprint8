@@ -67,9 +67,7 @@ export class LoginComponent {
     if (this.userForm.invalid) this.showPasswordMessage = true
     if (!this.userForm.invalid) {
       const password = this.userForm.get('password')!.value
-      this.authService.validatePassword(this.email!, password).subscribe(obs =>
-        this.authService._user = obs
-      )
+      this.authService.validatePassword(this.email!, password).subscribe()
       this.router.navigate(['/home'])
     }
   }

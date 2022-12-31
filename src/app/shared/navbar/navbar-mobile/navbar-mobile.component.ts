@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { User } from 'src/app/auth/interfaces/user';
 
 @Component({
   selector: 'app-navbar-mobile',
@@ -6,6 +7,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./navbar-mobile.component.scss']
 })
 export class NavbarMobileComponent {
+
+  @Input() user: User | undefined
+
   @ViewChild('burger') burger!: ElementRef
   @ViewChild('navMobile') navMobile!: ElementRef
 

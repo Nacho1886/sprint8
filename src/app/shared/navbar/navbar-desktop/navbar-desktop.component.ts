@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { User } from '../../../auth/interfaces/user';
+import { Observable, fromEvent, interval, map, startWith } from 'rxjs';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-navbar-desktop',
@@ -8,8 +10,12 @@ import { User } from '../../../auth/interfaces/user';
   styleUrls: ['./navbar-desktop.component.scss']
 })
 export class NavbarDesktopComponent {
-  user: User | undefined
-  constructor(private aAuthService: AuthService) {
-    this.user = this.aAuthService._user
-  }
+  @Input() user: User | undefined
+
+  constructor(private authService: AuthService,
+    private localSt: LocalStorageService
+    ) { }
+
+  logout = this.authService.logout
+  
 }

@@ -1,8 +1,8 @@
 <div class=" p-3">
     <ng-container *ngIf="desktopVersion; else mobileVersion">
-        <app-navbar-desktop></app-navbar-desktop>
+        <app-navbar-desktop [user]="user"></app-navbar-desktop>
     </ng-container>
     <ng-template #mobileVersion>
-        <app-navbar-mobile></app-navbar-mobile>
+        <app-navbar-mobile [user]="user"></app-navbar-mobile>
     </ng-template>
 </div>

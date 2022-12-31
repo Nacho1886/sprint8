@@ -1,5 +1,9 @@
 
 import { Component, HostListener } from '@angular/core';
+import { Observable, filter, fromEvent, interval, map, startWith } from 'rxjs';
+import { User } from 'src/app/auth/interfaces/user';
+import { AuthService } from 'src/app/auth/services/auth.service';
+
 
 
 @Component({
@@ -10,23 +14,25 @@ import { Component, HostListener } from '@angular/core';
 export class NavbarComponent {
   
   desktopVersion!: boolean;
-
+  user: User | undefined
+  currentValue!: string | null
   
-  constructor() {
+  constructor(private aAuthService: AuthService) {
     this.desktopVersion = matchMedia("(min-width: 900px)").matches
+    this.user = this.aAuthService.user;
   }
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
     this.desktopVersion = this.onChangeVersion(window.innerWidth)
   }
-  
-  onChangeVersion(element: any): boolean {
-    const withSize = element
 
-    if (withSize > 900) return true
+  onChangeVersion(width: number): boolean {
+    if (width > 900) return true
     return false
   }
+
+  
 }
 
 
