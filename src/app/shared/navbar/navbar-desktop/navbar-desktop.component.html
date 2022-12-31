@@ -6,7 +6,7 @@
             <div class="flex justify-content-center">
                 <div  *ngIf="user">
                     {{user.name}}
-                    <span class="cursor-pointer" (click)="logout()">
+                    <span class="cursor-pointer" (click)="logout(localSt)">
                         SIGN OUT
                     </span>
                 </div>

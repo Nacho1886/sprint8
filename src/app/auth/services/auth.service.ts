@@ -54,8 +54,8 @@ export class AuthService implements AsyncValidator {
     this.localSt.store('user',user)
   }
   
-  logout() {
-    this.localSt.clear('user')
+  logout(localSt: LocalStorageService) {
+    localSt.clear('user')
 
   }
 

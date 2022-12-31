@@ -12,8 +12,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 export class NavbarDesktopComponent {
   @Input() user: User | undefined
 
-  constructor(private authService: AuthService,
-    private localSt: LocalStorageService
+  constructor(
+    private authService: AuthService,
+    public localSt: LocalStorageService
     ) { }
 
   logout = this.authService.logout
