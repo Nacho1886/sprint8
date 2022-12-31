@@ -4,8 +4,8 @@
         </div>
         <div class="col-3">
             <div class="flex justify-content-center">
-                <div  *ngIf="user">
-                    {{user.name}}
+                <div  *ngIf="userData | async as data">
+                    {{data.name}}
                     <span class="cursor-pointer" (click)="logout(localSt)">
                         SIGN OUT
                     </span>

@@ -9,10 +9,10 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements AsyncValidator {
+export class AuthService {
   private _user: User | undefined
+  userData!: Observable<User | undefined>
   
-  public email: string | undefined
   public emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   private _urlJsonServer: string = 'http://localhost:3000/users/';
@@ -36,22 +36,21 @@ export class AuthService implements AsyncValidator {
     return this.http.get<Account>(this._urlJsonServer + email)
   }
 
-  validatePassword(email: string, password: string): Observable<void> {
+  validatePassword(email: string, password: string): Observable<User | undefined> {
     return this.http.get<Account>(this._urlJsonServer + email).pipe(
       map(user => {
-        if (user && user.password === password) {
-          const newUser = {
+        if (user && user.password === password) return {
           id: user.id,
           name: user.name,
         }
-        this.login(newUser)
+        return undefined
       }
-      })
+      )
     )
   }
 
-  login(user: User) {
-    this.localSt.store('user',user)
+  login(localSt: LocalStorageService, user: User | undefined) {
+    localSt.store('user',user)
   }
   
   logout(localSt: LocalStorageService) {
@@ -59,16 +58,6 @@ export class AuthService implements AsyncValidator {
 
   }
 
-  validate(control: AbstractControl): Observable<ValidationErrors | null> {
-    return this.http.get<ValidationErrors | null>(this._urlJsonServer + this.email).pipe(
-      map((res) => {
-        return res!["password"] === control.value ? null : { incorrectPassword: true }
-      }
-      )
-    )
-  }
-  /* registerOnValidatorChange?(fn: () => void): void {
-    throw new Error('Method not implemented.');
-  } */
+  
 
 }
