@@ -21,7 +21,7 @@ export class AuthService {
     private localSt: LocalStorageService
     ) {
     this._user$ = of(this.localSt.retrieve('user') ?? undefined)
-    this.localSt.observe('user').subscribe((value) => this._user$ = value)
+    this.localSt.observe('user').subscribe((value) => this._user$ = of(value))
   }
   
   get user(): Observable<User | undefined> { return this._user$ }

@@ -1,5 +1,5 @@
 
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable, filter, fromEvent, interval, map, startWith } from 'rxjs';
 import { User } from 'src/app/auth/interfaces/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnChanges {
   
   desktopVersion!: boolean;
   user: Observable<User | undefined>
@@ -32,7 +32,16 @@ export class NavbarComponent {
     return false
   }
 
-  
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    if (changes['user']) {
+      console.log(this.user)
+      
+      // this.user = this.authService.user
+    }
+    
+  }
 }
 
 
