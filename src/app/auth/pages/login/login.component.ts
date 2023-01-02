@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private passwordValidator: PasswordValidatorService
   ) {
+    this.authService.email$.subscribe(obs => this.email = obs)
+
     this.userForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.authService.emailPattern)]],
       password: ['', [Validators.required], [this.passwordValidator]]
@@ -69,13 +71,7 @@ export class LoginComponent implements OnInit {
   validateUserId() {
     const email = this.userForm.get('email')!.value
     if(!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email)
-    .subscribe(obs => {
-      if (obs) {
-        this.email = obs.id
-        this.passwordValidator.email = obs.id
-      }
-      
-    })
+    .subscribe(obs => { if (obs) this.authService.email$.next(obs.id) })
   }
 
   validateUserAccount() {

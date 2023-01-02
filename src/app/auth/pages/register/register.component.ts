@@ -1,15 +1,16 @@
-import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { PasswordValidatorService } from '../../services/password-validator.service';
+import { EmailValidatorService } from '../../services/email-validator.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent {
 
@@ -24,18 +25,18 @@ export class RegisterComponent {
     private router: Router,
     private localSt: LocalStorageService,
     private authService: AuthService,
-    private passwordValidator: PasswordValidatorService
+    private emailValidator: EmailValidatorService
   ) {
+    this.authService.email$.subscribe(obs => this.email = obs)
+
     this.userForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(this.authService.emailPattern)]],
-      password: ['', [Validators.required], [this.passwordValidator]]
-    })
-  }
-  ngOnInit(): void {
-    this.userForm.get('email')?.valueChanges.subscribe(value => {
-      if (value !== value.toLowerCase().trim()) this.userForm.get('email')?.setValue(value.toLowerCase().trim())
-    })
-  
+      email: [this.email, [Validators.required, Validators.pattern(this.authService.emailPattern)], [this.emailValidator]],
+      name: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
+      lastname: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
+      password: ['', [Validators.required]],
+      passwordConfirm: ['', [Validators.required]],
+      offers: [false, [Validators.required]]
+    }, {validators: this.authService.passwordChecker('password', 'passwordConfirm')})
   }
 
   closable(): void { this.router.navigate(['/home']) }
@@ -68,13 +69,7 @@ export class RegisterComponent {
   validateUserId() {
     const email = this.userForm.get('email')!.value
     if(!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email)
-    .subscribe(obs => {
-      if (obs) {
-        this.email = obs.id
-        this.passwordValidator.email = obs.id
-      }
-      
-    })
+    .subscribe(obs => { if (obs) this.authService.email$.next(obs.id) })
   }
 
   validateUserAccount() {
@@ -86,3 +81,4 @@ export class RegisterComponent {
     }
   }
 }
+
