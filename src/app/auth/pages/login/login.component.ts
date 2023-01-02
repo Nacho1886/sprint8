@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
   showPasswordMessage: boolean = false
 
   constructor(
-    private authService: AuthService,
-    private passwordValidator: PasswordValidatorService,
     private fb: FormBuilder,
     private router: Router,
-    private localSt: LocalStorageService
+    private localSt: LocalStorageService,
+    private authService: AuthService,
+    private passwordValidator: PasswordValidatorService
   ) {
     this.userForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.authService.emailPattern)]],
@@ -68,9 +68,13 @@ export class LoginComponent implements OnInit {
 
   validateUserId() {
     const email = this.userForm.get('email')!.value
-    this.authService.validateEmail(email).subscribe(obs => {
-      this.email = obs.id
-      this.passwordValidator.email = obs.id
+    if(!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email)
+    .subscribe(obs => {
+      if (obs) {
+        this.email = obs.id
+        this.passwordValidator.email = obs.id
+      }
+      
     })
   }
 

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, map, share } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, map, of, share, filter, shareReplay } from 'rxjs';
 import {LocalStorageService } from 'ngx-webstorage';
 
 import { Account } from '../interfaces/account';
 import { User } from '../interfaces/user';
 import { FormControl, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     private localSt: LocalStorageService
     ) {
       this._user$ = new BehaviorSubject<User | undefined>(this.localSt.retrieve('user') ?? undefined);
@@ -29,9 +31,19 @@ export class AuthService {
   get user(): Observable<User | undefined> { return this._user$.pipe(share()) }
 
 
-  validateEmail(email: string): Observable<Account> {
-    return this.http.get<Account>(this._urlJsonServer + email)
+  
+
+  validateExistEmail(email: string): Observable<Account> {
+    return this.http.get<Account>(this._urlJsonServer + email).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 404) {
+          this.router.navigate(['/auth/register'])
+        }
+        throw err
+      })
+    )
   }
+  
 
   validatePassword(email: string, password: string): Observable<User | undefined> {
     return this.http.get<Account>(this._urlJsonServer + email).pipe(
