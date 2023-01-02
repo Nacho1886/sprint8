@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, AbstractControlOptions } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +18,7 @@ export class RegisterComponent {
 
   email: string | undefined
   userForm: FormGroup
-  showPasswordMessage: boolean = false
+  // showPasswordMessage: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -30,38 +30,35 @@ export class RegisterComponent {
     this.authService.email$.subscribe(obs => this.email = obs)
 
     this.userForm = this.fb.group({
-      email: [this.email, [Validators.required, Validators.pattern(this.authService.emailPattern)], [this.emailValidator]],
+      email: [this.email],
       name: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
       lastname: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.authService.passwordPattern)]],
       passwordConfirm: ['', [Validators.required]],
-      offers: [false, [Validators.required]]
-    }, {validators: this.authService.passwordChecker('password', 'passwordConfirm')})
+      offers: [false]
+    }, {validator: (formGroup: FormGroup) => this.authService.passwordChecker(formGroup, 'password', 'passwordConfirm')})
   }
 
   closable(): void { this.router.navigate(['/home']) }
   
 
-  get emailErrorMsg(): string {
-    const errors = this.userForm.get('email')?.errors
-    if (errors?.['pattern']) return 'Please enter a valid email address.'
+  getNameErrorMsg(inputName: string): string {
+    const errors = this.userForm.get(inputName)?.errors
+    if (errors?.['pattern']) return `Please enter a valid ${inputName}.`
     return 'Required'
   }
-  get passwordErrorMsg(): string {
+  getPasswordErrorMsg(): string {
     const errors = this.userForm.get('password')?.errors
-    if (errors?.['incorrectPassword'])
-      return "The credentials you entered are incorrect. Reminder: passwords are case sensitive."
+    if (errors?.['minLength']) return 'Enter at least 6 characters.'
+    if (errors?.['pattern']) return 'Use letters together with spaces, numbers, or symbols (!@#$%^&*).'
+    if (errors?.['mustMatch']) return "The credentials you entered are incorrect, passwords are different."
+
     return 'Required'
   }
 
 
-  isInvalidEmail() {
-    if (this.userForm.get('email')?.touched) return this.userForm.controls['email'].errors
-    return null
-  }
-  isInvalidPassword() {
-    if (this.userForm.get('password')?.touched && this.showPasswordMessage)
-      return this.userForm.controls['password'].errors
+  isInvalidField(inputName: string) {
+    if (this.userForm.get(inputName)?.touched) return this.userForm.controls[inputName].errors
     return null
   }
 
@@ -73,7 +70,7 @@ export class RegisterComponent {
   }
 
   validateUserAccount() {
-    if (this.userForm.invalid) this.showPasswordMessage = true
+    // if (this.userForm.invalid) this.showPasswordMessage = true
     if (!this.userForm.invalid) {
       const password = this.userForm.get('password')!.value
       this.authService.validatePassword(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))

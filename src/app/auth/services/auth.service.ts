@@ -6,7 +6,7 @@ import {LocalStorageService } from 'ngx-webstorage';
 
 import { Account } from '../interfaces/account';
 import { User } from '../interfaces/user';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,9 @@ export class AuthService {
   private _user$: BehaviorSubject<User | undefined>
 
   
-  public emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-  public namePattern = /^[A-Z][a-z]+$/;
+  public emailPattern: RegExp = /^[a-z0-9.%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/
+  public passwordPattern: RegExp = /(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[$@$!%?&])[A-Za-z\d$@$!%?&]./
+  public namePattern: RegExp = /^[A-Za-z]+$/
 
 
   private _urlJsonServer: string = 'http://localhost:3000/users/';
@@ -63,13 +64,15 @@ export class AuthService {
   
   logout(localSt: LocalStorageService) { localSt.clear('user') }
 
-  passwordChecker(field1: string, field2:string) {
-    return ( formGroup: AbstractControl) => {
-      const pass1 = formGroup.get(field1)?.value
-      const pass2 = formGroup.get(field2)?.value
-
-      pass1 !== pass2 ? formGroup.get(field2)?.setErrors({ mustMatch: true }) : formGroup.get(field2)?.setErrors(null)
-    }
+  passwordChecker(formGroup: FormGroup, field1: string, field2: string) {
+    formGroup.get(field1)?.setErrors(
+      (formGroup: AbstractControl): ValidationErrors | null => {
+        const pass1 = formGroup.get(field1)?.value
+        const pass2 = formGroup.get(field2)?.value
+  
+        return pass1 !== pass2 ? { mustMatch: true } : null
+      }
+    )
   }
   
 }

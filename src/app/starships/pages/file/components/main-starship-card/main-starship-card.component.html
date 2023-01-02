@@ -26,10 +26,10 @@
             </p-accordion>
         </ng-container>
         <ng-template #loading>
-            <app-loading></app-loading>
+            <app-loading [showClasses]="false"></app-loading>
         </ng-template>
         <ng-template pTemplate="footer">
-            <p-button label="Return" icon="pi pi-undo" routerLink="starships/list"></p-button>
+            <p-button class="w-auto" label="Return" icon="pi pi-undo" routerLink="starships/list"></p-button>
         </ng-template>
     </p-card>
 </div>
