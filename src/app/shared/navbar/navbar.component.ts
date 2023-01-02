@@ -1,6 +1,6 @@
 
-import { Component, HostListener, OnChanges, SimpleChanges } from '@angular/core';
-import { Observable, filter, fromEvent, interval, map, startWith } from 'rxjs';
+import { Component, HostListener } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/interfaces/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
@@ -11,15 +11,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnChanges {
+export class NavbarComponent {
   
   desktopVersion!: boolean;
   user: Observable<User | undefined>
-  currentValue!: string | null
   
-  constructor(private aAuthService: AuthService) {
+  constructor(private authService: AuthService) {
     this.desktopVersion = matchMedia("(min-width: 900px)").matches
-    this.user = this.aAuthService.user;
+    this.user = this.authService.user;
   }
 
   @HostListener('window:resize', ['$event'])
@@ -32,16 +31,6 @@ export class NavbarComponent implements OnChanges {
     return false
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    if (changes['user']) {
-      console.log(this.user)
-      
-      // this.user = this.authService.user
-    }
-    
-  }
 }
 
 
