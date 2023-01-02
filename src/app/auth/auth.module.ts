@@ -18,8 +18,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    NgprimeModule,
     ReactiveFormsModule,
+    NgprimeModule,
     AuthRoutingModule,
     SharedModule
   ],

@@ -4,12 +4,23 @@
         </div>
         <div class="col-3">
             <div class="flex justify-content-center">
-                <div  *ngIf="user | async as data">
-                    {{data.name}}
-                    <span class="cursor-pointer" (click)="logout(localSt)">
-                        SIGN OUT
-                    </span>
+                
+                <div class="grid w-full" *ngIf="user | async as data; else elseTemplate">
+                    <div class="col-6">{{data.name | titlecase}}</div>
+                    <div class="col-6 flex justify-content-center">
+                        <span class="cursor-pointer" (click)="logout(localSt)">
+                            SIGN OUT
+                        </span>
+                    </div>
                 </div>
+                <ng-template #elseTemplate>
+                    <div  class="flex justify-content-center">
+                        <span class="cursor-pointer" routerLink="/auth/login">
+                            SIGN IN
+                        </span>
+                        
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

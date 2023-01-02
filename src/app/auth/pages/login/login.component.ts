@@ -1,10 +1,8 @@
-import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { timeout, Observable } from 'rxjs';
-import { User } from '../../interfaces/user';
 import { LocalStorageService } from 'ngx-webstorage';
 import { PasswordValidatorService } from '../../services/password-validator.service';
 
@@ -14,7 +12,7 @@ import { PasswordValidatorService } from '../../services/password-validator.serv
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   @ViewChild('loginDialog') loginDialog!: ElementRef
 
@@ -33,6 +31,12 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.pattern(this.authService.emailPattern)]],
       password: ['', [Validators.required], [this.passwordValidator]]
     })
+  }
+  ngOnInit(): void {
+    this.userForm.get('email')?.valueChanges.subscribe(value => {
+      if (value !== value.toLowerCase().trim()) this.userForm.get('email')?.setValue(value.toLowerCase().trim())
+    })
+  
   }
 
   closable(): void { this.router.navigate(['/home']) }
@@ -57,7 +61,7 @@ export class LoginComponent {
   }
   isInvalidPassword() {
     if (this.userForm.get('password')?.touched && this.showPasswordMessage)
-      return this.userForm.controls['password'].errors, 1000
+      return this.userForm.controls['password'].errors
     return null
   }
 

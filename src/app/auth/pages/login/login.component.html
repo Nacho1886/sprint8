@@ -25,7 +25,7 @@
             <p>{{email}}</p>
             <form [formGroup]="userForm" (ngSubmit)="validateUserAccount()" class="grid mt-4 gap-3">
                 <input class="col-12" [style.borderColor]="isInvalidPassword() ? 'red' : null"
-                type="text" placeholder="Password" formControlName="password" (keyup)="showPasswordMessage = false">
+                type="password" placeholder="Password" formControlName="password" (focus)="showPasswordMessage = false">
                 <div style="color: 'red'" *ngIf="isInvalidPassword()">
                         {{ passwordErrorMsg }}
                 </div>
@@ -35,6 +35,7 @@
         </ng-template>
         <p>{{userForm.value | json}}</p>
         <p>{{userForm.invalid| json}}</p>
+        <p>{{userForm.controls['email'].errors | json}}</p>
         <p>{{userForm.controls['password'].errors | json}}</p>
     </p-dialog>
 </div>

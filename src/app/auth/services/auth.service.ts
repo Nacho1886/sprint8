@@ -5,6 +5,7 @@ import {LocalStorageService } from 'ngx-webstorage';
 
 import { Account } from '../interfaces/account';
 import { User } from '../interfaces/user';
+import { FormControl, AbstractControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -44,5 +45,5 @@ export class AuthService {
 
   login(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
   
-  logout(localSt: LocalStorageService) { this.localSt.clear('user') }
+  logout(localSt: LocalStorageService) { localSt.clear('user') }
 }
