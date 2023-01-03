@@ -29,11 +29,11 @@ export class AuthService {
     private localSt: LocalStorageService
     ) {
       this.email$ = new Subject()
-      this._user$ = new BehaviorSubject(this.localSt.retrieve('user') ?? undefined);
+      this._user$ = new BehaviorSubject(this.localSt.retrieve('user') ?? undefined)
       this.localSt.observe('user').subscribe((value) => this._user$.next(value))
   }
   
-  get user(): Observable<User | undefined> { return this._user$.pipe(share()) }
+  get user(): Observable<User | undefined> { return this._user$.asObservable().pipe(share()) }
 
 
   

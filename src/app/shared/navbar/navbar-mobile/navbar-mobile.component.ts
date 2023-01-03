@@ -1,6 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { User } from 'src/app/auth/interfaces/user';
-import { Observable } from 'rxjs';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-navbar-mobile',
@@ -8,8 +6,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navbar-mobile.component.scss']
 })
 export class NavbarMobileComponent {
-
-  @Input() user!: Observable<User | undefined> 
 
   @ViewChild('burger') burger!: ElementRef
   @ViewChild('navMobile') navMobile!: ElementRef

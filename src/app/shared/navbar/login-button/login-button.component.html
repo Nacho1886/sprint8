@@ -7,16 +7,21 @@
   <a #mainBtn class="mainBtn" (click)="displayMenu()"><i class="fa fa-rebel"></i></a>
 
   <ul #options class="options">
-    <li class="option option1">
-      <a class="opt opt1" routerLink="/auth/login" (click)="displayMenu()"><i class="pi pi-sign-in"></i></a>
-      <p class="popup">Go to Your Dashboard</p>
-    <li>
-    <li class="option option2">
-      <a class="opt opt2" routerLink="['/logout']" (click)="displayMenu()"><i class="pi pi-sign-out"></i></a>
-      <p class="popup">Update Your Prfoile</p>
-    <li>
+    <ng-container *ngIf="user | async; else login">
+      
+      <li class="option option2">
+        <a class="opt opt2 cursor-pointer" (click)="displayMenu()"><i (click)="logout(localSt)" class="pi pi-sign-out"></i></a>
+        <li>
+        </ng-container>
+        <ng-template #login>
+      <li class="option option1">
+        <a class="opt opt1" routerLink="/auth/login" (click)="displayMenu()"><i class="pi pi-sign-in"></i></a>
+      <li>
+      
+    </ng-template>
+    
     <!-- <li class="option option3">
-      <a class="opt opt3" routerLink="[]" (click)="displayMenu()"><i class="fa fa-inbox"></i></a>
+      <a class="opt opt3"><i class="fa fa-inbox"></i></a>
       <p class="popup">Check you Comms</p>
     <li> -->
   <ul>

@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { User } from '../../../auth/interfaces/user';
-import { Observable, fromEvent, interval, map, startWith } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-desktop',
@@ -10,15 +11,19 @@ import { LocalStorageService } from 'ngx-webstorage';
   styleUrls: ['./navbar-desktop.component.scss']
 })
 export class NavbarDesktopComponent {
-  @Input() user!: Observable<User | undefined>
+  user!: Observable<User | undefined>
 
 
   constructor(
-    private authService: AuthService,
-    public localSt: LocalStorageService
-    ) { }
+    private router: Router,
+    public localSt: LocalStorageService,
+    private authService: AuthService
+  ) {
+    this.user = this.authService.user
+  }
 
   logout = this.authService.logout
 
+  get path() { return this.router.url.split('/').find(e =>  e !== '') }
   
 }

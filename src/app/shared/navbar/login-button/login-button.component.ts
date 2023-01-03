@@ -1,4 +1,8 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/auth/interfaces/user';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-login-button',
@@ -9,8 +13,17 @@ export class LoginButtonComponent implements OnInit {
   @ViewChild('mainBtn') mainBtn!: ElementRef
   @ViewChild('options') options!: ElementRef
 
-  constructor() { }
+  user: Observable<User | undefined>
   
+  constructor(
+    private authService: AuthService,
+    public localSt: LocalStorageService
+    ) {
+    this.user = this.authService.user
+    }
+
+  logout = this.authService.logout
+
   displayMenu() {
     this.mainBtn.nativeElement.classList.toggle("clickedMainBtn")
     this.options.nativeElement.classList.toggle("displayOptions")
