@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginDialog') loginDialog!: ElementRef
 
   email: string | undefined
+  accountDontExist: boolean = true
   userForm: FormGroup
   showPasswordMessage: boolean = false
 
@@ -38,28 +39,26 @@ export class LoginComponent implements OnInit {
     this.userForm.get('email')?.valueChanges.subscribe(value => {
       if (value !== value.toLowerCase().trim()) this.userForm.get('email')?.setValue(value.toLowerCase().trim())
     })
-  
   }
 
   closable(): void { this.router.navigate(['/home']) }
-  
 
-  isInvalidEmail() {
-    if (this.userForm.get('email')?.touched) return this.userForm.controls['email'].errors
-    return null
+
+  isInvalidEmail(): ValidationErrors | null {
+    return this.userForm.get('email')?.touched ? this.userForm.controls['email'].errors : null
   }
-  
-  isInvalidPassword() {
-    if (this.userForm.get('password')?.touched && this.showPasswordMessage)
-      return this.userForm.controls['password'].errors
-    return null
+
+  isInvalidPassword(): ValidationErrors | null {
+    return this.userForm.get('password')?.touched && this.showPasswordMessage ?
+      this.userForm.controls['password'].errors : null
   }
 
 
   validateUserId() {
     const email = this.userForm.get('email')!.value
-    if(!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email)
-    .subscribe(obs => { if (obs) this.authService.email$.next(obs.id) })
+    if (!this.userForm.controls['email'].errors)
+      this.authService.validateExistEmail(email)
+      .subscribe(data => data ? this.accountDontExist = false : this.accountDontExist = true)
   }
 
   validateUserAccount() {

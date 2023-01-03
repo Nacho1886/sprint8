@@ -1,9 +1,9 @@
-import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
+import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { LocalStorageService } from 'ngx-webstorage';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -15,17 +15,15 @@ export class RegisterComponent {
 
   @ViewChild('loginDialog') loginDialog!: ElementRef
 
-  email: string | undefined
+  email!: string
   userForm: FormGroup
-  // showPasswordMessage: boolean = false
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private localSt: LocalStorageService,
     private authService: AuthService
   ) {
-    this.authService.email$.subscribe(obs => this.email = obs)
+    this.email = this.authService.email$.getValue()
 
     this.userForm = this.fb.group({
       email: [this.email],
@@ -35,7 +33,7 @@ export class RegisterComponent {
       passwordConfirm: ['', [Validators.required]],
       offers: [false]
     }
-    , {validator:this.authService.passwordMatchValidator}
+    , {validator:this.authService.passwordMatchValidator as AbstractControlOptions}
     )
   }
 
@@ -43,22 +41,12 @@ export class RegisterComponent {
 
 
   isInvalidField(inputName: string) {
-    if (this.userForm.get(inputName)?.touched) return this.userForm.controls[inputName].errors
-    return null
+    return this.userForm.get(inputName)?.touched ?  this.userForm.controls[inputName].errors : null
   }
 
-  validateUserId() {
-    const email = this.userForm.get('email')!.value
-    if(!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email)
-    .subscribe(obs => { if (obs) this.authService.email$.next(obs.id) })
-  }
 
-  validateUserAccount() {
-    if (!this.userForm.invalid) {
-      const password = this.userForm.get('password')!.value
-      this.authService.validatePassword(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))
-      this.router.navigate(['/home'])
-    }
+  createUserAccount() {
+    if (!this.userForm.invalid) this.authService.createNewAccount(this.userForm)
   }
 }
 

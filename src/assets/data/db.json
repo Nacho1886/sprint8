@@ -3,13 +3,14 @@
     {
       "id": "pepe@quimote.es",
       "name": "pepe",
+      "lastname": "Pujol",
       "password": "pepote"
     }
   ],
   "starshipsImage": [
     {
       "id": 2,
-      "url": "https://static.wixstatic.com/media/839712_cac07ad9620149e4b27bcf0506c1211e.jpg/v1/fill/w_546,h_343,al_c,lg_1,q_80,enc_auto/839712_cac07ad9620149e4b27bcf0506c1211e.jpg"
+      "url": "https://static.wixstatic.com/media/839712_cac07ad9620149e4b27bcf0506c1211e.jpg"
     },
     {
       "id": 3,

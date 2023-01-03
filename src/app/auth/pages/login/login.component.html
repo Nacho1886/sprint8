@@ -8,7 +8,7 @@
                 <div class="col-2 flex justify-content-end"><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text" (click)="closable()"></button></div>
             </div>
         </p-header>
-        <ng-container *ngIf="!email; else idIsCorrect">
+        <ng-container *ngIf="accountDontExist; else idIsCorrect">
             <span class="spanText">ENTER YOUR EMAIL ADDRESS</span>
             <form [formGroup]="userForm" (ngSubmit)="validateUserId()" class="grid mt-4 gap-3">
                 <input class="col-12"  [style.borderColor]="isInvalidEmail() ? 'red' : null" 
@@ -33,6 +33,5 @@
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>
             </form>
         </ng-template>
-        <p>{{userForm.controls['email'].errors | json}}</p>
     </p-dialog>
 </div>

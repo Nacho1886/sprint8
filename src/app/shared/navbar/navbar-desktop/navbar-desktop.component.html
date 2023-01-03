@@ -6,17 +6,22 @@
             <div class="flex justify-content-center">
                 
                 <div *ngIf="user | async as data; else elseTemplate">
-                    <div class="absolute">NAME USER: {{data.name | uppercase}}</div>
+                    <div class="absolute"><i class="pi pi-user"></i>
+                        {{data.name | uppercase}}
+                        {{data.lastname | uppercase}}
+                    </div>
                     <div class="flex justify-content-center">
-                        <span class="cursor-pointer" (click)="logout(localSt)">
-                            SIGN OUT
+                        <span class="cursor-pointer mt-1" (click)="logout(localSt)">
+                            SIGN OUT 
+                            <i class="pi pi-sign-out"></i>
                         </span>
                     </div>
                 </div>
                 <ng-template #elseTemplate>
                     <div class="flex justify-content-center">
-                        <span class="cursor-pointer" routerLink="/auth/login">
-                            SIGN IN
+                        <span class="cursor-pointer mt-1" routerLink="/auth/login">
+                            SIGN IN 
+                            <i class="pi pi-sign-in"></i>
                         </span>
                     </div>
                 </ng-template>

@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class PasswordValidatorService implements AsyncValidator {
 
-  public email:string | undefined
+  public email: string | undefined
   private _urlJsonServer: string = 'http://localhost:3000/users/';
 
   constructor(

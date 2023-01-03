@@ -11,11 +11,11 @@
         <div>
             <span class="flex justify-content-center spanText">CREATE YOUR ACCOUNT</span>
             <p>{{email}}</p>
-            <form [formGroup]="userForm" (ngSubmit)="validateUserAccount()" class="grid mt-4 gap-3">
+            <form [formGroup]="userForm" (ngSubmit)="createUserAccount()" class="grid mt-4 gap-3">
                 <input class="col-12" [style.borderColor]="isInvalidField('name') ? 'red' : null"
                 type="text" placeholder="First Name" formControlName="name">
                 <div style="color: 'red'" *ngIf="isInvalidField('name')">
-                        {{ userForm | nameRegisterError:'name'}}
+                        {{ userForm | nameRegisterError:'name' }}
                 </div>
                 <input class="col-12" [style.borderColor]="isInvalidField('lastname') ? 'red' : null"
                 type="text" placeholder="Last Name" formControlName="lastname">
@@ -24,10 +24,13 @@
                 </div>
                 <input class="col-12" [style.borderColor]="isInvalidField('password') ? 'red' : null"
                 type="password" placeholder="Password" formControlName="password">
+                <div style="color: 'red'" *ngIf="isInvalidField('password')">
+                        {{ userForm | passwordRegisterError:'password' }}
+                </div>
                 <input class="col-12" [style.borderColor]="isInvalidField('passwordConfirm') ? 'red' : null"
                 type="password" placeholder="Confirm Password" formControlName="passwordConfirm">
                 <div style="color: 'red'" *ngIf="isInvalidField('passwordConfirm')">
-                        {{ userForm | passwordRegisterError }}
+                        {{ userForm | passwordRegisterError: 'passwordConfirm' }}
                 </div>
                 <button class="col-12" pButton pRipple type="submit" label="Sign In"
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>
