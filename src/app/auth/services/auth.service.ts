@@ -6,7 +6,7 @@ import {LocalStorageService } from 'ngx-webstorage';
 
 import { Account } from '../interfaces/account';
 import { User } from '../interfaces/user';
-import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
+import { AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class AuthService {
 
   
   public emailPattern: RegExp = /^[a-z0-9.%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/
-  public passwordPattern: RegExp = /(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[$@$!%?&])[A-Za-z\d$@$!%?&]./
+  public passwordPattern: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/
   public namePattern: RegExp = /^[A-Za-z]+$/
 
 
@@ -64,7 +64,7 @@ export class AuthService {
   
   logout(localSt: LocalStorageService) { localSt.clear('user') }
 
-  passwordChecker(formGroup: FormGroup, field1: string, field2: string) {
+  /* passwordChecker(formGroup: FormGroup, field1: string, field2: string) {
     formGroup.get(field1)?.setErrors(
       (formGroup: AbstractControl): ValidationErrors | null => {
         const pass1 = formGroup.get(field1)?.value
@@ -73,6 +73,19 @@ export class AuthService {
         return pass1 !== pass2 ? { mustMatch: true } : null
       }
     )
-  }
+  } */
+  passwordChecker(c: AbstractControl): { mustMatch: boolean } | null {
+    c.get('password')?.setErrors
+    
+    if (c.get('password')?.value !== c.get('passwordConfirm')?.value) {
+        return {mustMatch: true};
+    }
+    return null
+}
+
+passwordMatchValidator(form: FormGroup) {
+  return form.controls['password'].value === form.controls['passwordConfirm'].value
+  ? null : {'mustMatch': true};
+}
   
 }

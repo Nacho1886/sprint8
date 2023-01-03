@@ -14,7 +14,7 @@
                 <input class="col-12"  [style.borderColor]="isInvalidEmail() ? 'red' : null" 
                 type="email" placeholder="Email Address" formControlName="email">
                 <div style="color: 'red'" *ngIf="isInvalidEmail()">
-                    {{ emailErrorMsg }}
+                    {{ userForm | emailLoginError }}
                 </div>
                 <button class="col-12" pButton pRipple label="Continue"
                     class="w-full p-button-raised p-button-secondary p-button-text"></button>
@@ -27,7 +27,7 @@
                 <input class="col-12" [style.borderColor]="isInvalidPassword() ? 'red' : null"
                 type="password" placeholder="Password" formControlName="password" (focus)="showPasswordMessage = false">
                 <div style="color: 'red'" *ngIf="isInvalidPassword()">
-                        {{ passwordErrorMsg }}
+                        {{ userForm | passwordLoginError }}
                 </div>
                 <button class="col-12" pButton pRipple type="submit" label="Sign In"
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>

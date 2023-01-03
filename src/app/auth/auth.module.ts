@@ -8,6 +8,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SharedModule } from '../shared/shared.module';
+import { PipesAuthModule } from './pipes/pipes-auth.module';
 
 
 
@@ -21,7 +22,8 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     NgprimeModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
+    PipesAuthModule
   ],
   exports: [
     LoginComponent,

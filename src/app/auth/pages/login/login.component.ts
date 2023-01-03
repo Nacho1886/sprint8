@@ -44,23 +44,11 @@ export class LoginComponent implements OnInit {
   closable(): void { this.router.navigate(['/home']) }
   
 
-  get emailErrorMsg(): string {
-    const errors = this.userForm.get('email')?.errors
-    if (errors?.['pattern']) return 'Please enter a valid email address.'
-    return 'Required'
-  }
-  get passwordErrorMsg(): string {
-    const errors = this.userForm.get('password')?.errors
-    if (errors?.['incorrectPassword'])
-      return "The credentials you entered are incorrect. Reminder: passwords are case sensitive."
-    return 'Required'
-  }
-
-
   isInvalidEmail() {
     if (this.userForm.get('email')?.touched) return this.userForm.controls['email'].errors
     return null
   }
+  
   isInvalidPassword() {
     if (this.userForm.get('password')?.touched && this.showPasswordMessage)
       return this.userForm.controls['password'].errors
