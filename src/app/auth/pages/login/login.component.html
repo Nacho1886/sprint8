@@ -13,8 +13,8 @@
             <form [formGroup]="userForm" (ngSubmit)="validateUserId()" class="grid mt-4 gap-3">
                 <input class="col-12"  [style.borderColor]="isInvalidEmail() ? 'red' : null" 
                 type="email" placeholder="Email Address" formControlName="email">
-                <div style="color: 'red'" *ngIf="isInvalidEmail()">
-                    {{ userForm | emailLoginError }}
+                <div [style.color]="isInvalidEmail() ? 'red' : 'green'" *ngIf="isInvalidEmail()">
+                    {{ isInvalidEmail() | emailLoginError }}
                 </div>
                 <button class="col-12" pButton pRipple label="Continue"
                     class="w-full p-button-raised p-button-secondary p-button-text"></button>
@@ -24,10 +24,11 @@
             <span class="flex justify-content-center spanText">ENTER YOUR PASSWORD</span>
             <p>{{email}}</p>
             <form [formGroup]="userForm" (ngSubmit)="validateUserAccount()" class="grid mt-4 gap-3">
-                <input class="col-12" [style.borderColor]="isInvalidPassword() ? 'red' : null"
-                type="password" placeholder="Password" formControlName="password" (focus)="showPasswordMessage = false">
+                <input class="col-12" [style.borderColor]="isInvalidPassword() ? 'red' : null" 
+                (keydown)="showPasswordMessage = false; $event.stopPropagation()"
+                type="password" placeholder="Password" formControlName="password">
                 <div style="color: 'red'" *ngIf="isInvalidPassword()">
-                        {{ userForm | passwordLoginError }}
+                        {{ isInvalidPassword() | passwordLoginError }}
                 </div>
                 <button class="col-12" pButton pRipple type="submit" label="Sign In"
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>

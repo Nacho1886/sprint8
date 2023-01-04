@@ -36,7 +36,7 @@ export class AuthService {
   get user(): Observable<User | undefined> { return this._user$.asObservable().pipe(share()) }
 
 
-  validateExistEmail(email: string) {
+  validateExistEmail(email: string): Observable<Account> {
     this.email$.next(email)
     return this.http.get<Account>(this._urlJsonServer + email).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -51,7 +51,7 @@ export class AuthService {
 
 
   createNewAccount(form: FormGroup) {
-    const {email, name, lastname, password } = form.value
+    const { email, name, lastname, password } = form.value
     const newAccount: Account = {
       id: email,
       name: name,
@@ -73,7 +73,7 @@ export class AuthService {
   logout(localSt: LocalStorageService) { localSt.clear('user') }
 
 
-validatePassword(email: string, password: string): Observable<User | undefined> {
+  validatePassword(email: string, password: string): Observable<User | undefined> {
     return this.http.get<Account>(this._urlJsonServer + email).pipe(
       map(user => {
         if (user && user.password === password)
@@ -83,9 +83,5 @@ validatePassword(email: string, password: string): Observable<User | undefined> 
     )
   }
 
-  passwordMatchValidator(form: FormGroup) {
-    form.get('passwordConfirm')?.setErrors(
-      form.controls['password'].value === form.controls['passwordConfirm'].value
-        ? null : { 'mustMatch': true })
-  }
+  
 }

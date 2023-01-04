@@ -1,9 +1,8 @@
-import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators, AbstractControlOptions } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -26,27 +25,45 @@ export class RegisterComponent {
     this.email = this.authService.email$.getValue()
 
     this.userForm = this.fb.group({
-      email: [this.email],
+      email: [this.email, [Validators.required]],
       name: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
       lastname: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.authService.passwordPattern)]],
-      passwordConfirm: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.authService.passwordPattern)
+      ]],
+      passwordConfirm: [''],
       offers: [false]
     }
-    , {validator:this.authService.passwordMatchValidator as AbstractControlOptions}
+      , { validator: (control: AbstractControl) => this.validatorConfirmPassword(control)}
     )
   }
-
-  closable(): void { this.router.navigate(['/home']) }
-
+  
 
   isInvalidField(inputName: string) {
-    return this.userForm.get(inputName)?.touched ?  this.userForm.controls[inputName].errors : null
+    return this.userForm.get(inputName)?.touched ? this.userForm.controls[inputName].errors : null
   }
 
 
   createUserAccount() {
-    if (!this.userForm.invalid) this.authService.createNewAccount(this.userForm)
+    this.userForm.invalid ? this.userForm.markAllAsTouched()
+      : this.authService.createNewAccount(this.userForm)
   }
+  
+
+  validatorConfirmPassword(form: AbstractControl) {
+    
+    const passwordControl = form.get('password')!;
+    const passwordConfirmControl = form.get('passwordConfirm')!;
+    const areDiferrent = passwordControl.value !== passwordConfirmControl.value
+
+    const errorsConfirmPassword = () => {
+      return areDiferrent ? { mustMatch: true }
+        : passwordConfirmControl.value === ''
+          ? { required: true } : null
+    }
+
+    return passwordConfirmControl.setErrors(errorsConfirmPassword())
+  }
+
+  closable(): void { this.router.navigate(['/home']) }
 }
 

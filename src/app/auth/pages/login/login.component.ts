@@ -16,9 +16,10 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('loginDialog') loginDialog!: ElementRef
 
+  userForm: FormGroup
+  
   email: string | undefined
   accountDontExist: boolean = true
-  userForm: FormGroup
   showPasswordMessage: boolean = false
 
   constructor(
@@ -41,32 +42,32 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  closable(): void { this.router.navigate(['/home']) }
-
-
   isInvalidEmail(): ValidationErrors | null {
     return this.userForm.get('email')?.touched ? this.userForm.controls['email'].errors : null
   }
 
   isInvalidPassword(): ValidationErrors | null {
-    return this.userForm.get('password')?.touched && this.showPasswordMessage ?
-      this.userForm.controls['password'].errors : null
+    return this.showPasswordMessage ? this.userForm.controls['password'].errors : null
   }
 
 
   validateUserId() {
-    const email = this.userForm.get('email')!.value
-    if (!this.userForm.controls['email'].errors)
-      this.authService.validateExistEmail(email)
-      .subscribe(data => data ? this.accountDontExist = false : this.accountDontExist = true)
+    const email = this.userForm.get('email')!
+    if (!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email.value)
+    .subscribe(data => data ? this.accountDontExist = false : this.accountDontExist = true)
+    email.markAsTouched()
+  }
+
+  loginUser() {
+    const password = this.userForm.get('password')!.value
+    this.authService.validatePassword(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))
+    this.router.navigate(['/home'])
   }
 
   validateUserAccount() {
-    if (this.userForm.invalid) this.showPasswordMessage = true
-    if (!this.userForm.invalid) {
-      const password = this.userForm.get('password')!.value
-      this.authService.validatePassword(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))
-      this.router.navigate(['/home'])
-    }
+    this.userForm.invalid ? this.showPasswordMessage = true : this.loginUser()
   }
+
+
+  closable(): void { this.router.navigate(['/home']) }
 }
