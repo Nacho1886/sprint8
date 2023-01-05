@@ -81,9 +81,7 @@ export class AuthService {
     })
   }
 
-  deleteEmail() {
-    this.email$.next('')
-  }
+  
 
   login(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
 
