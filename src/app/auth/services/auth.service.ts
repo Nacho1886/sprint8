@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, catchError, map, share, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, concatMap, map, share, tap } from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
 
 import { Account } from '../interfaces/account';
 import { User } from '../interfaces/user';
-import { AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   authPasswordUser(password: string): Observable<User | undefined> {
-    
+
     const email: string = this.email$.getValue()
 
     return this.http.get<Account>(this._urlJsonServer + email).pipe(
@@ -62,28 +62,40 @@ export class AuthService {
     )
   }
 
+  createAndLogin(form: FormGroup) {
+    this.createNewAccount(form).pipe(
+      concatMap(() => this.loginUser(form))
+    ).subscribe()
+  }
 
-  createNewAccount(form: FormGroup) {
-    const { email, name, lastname, password } = form.value
+  createNewAccount(form: FormGroup): Observable<Object> {
+    const { email, name, lastname, password, offers } = form.value;
+
     const newAccount: Account = {
       id: email,
       name: name,
       lastname: lastname,
-      password: password
+      password: password,
+      offers: offers
     }
-    this.http.post(this._urlJsonServer, newAccount).subscribe({
-      next: (response) => {
-        console.log('POST request is successful ', response);
-      },
-      error: (error) => {
-        console.log('Error', error);
-      }
-    })
+
+    return this.http.post(this._urlJsonServer, newAccount).pipe(
+      tap((response) => console.log('Account successfuly created ', response))
+    )
   }
 
-  
+  loginUser(form: FormGroup): Observable<User | undefined> {
+    const password = form.get('password')!.value
+    return this.authPasswordUser(password).pipe(
+      tap(obs => {
+        this.router.navigate(['/home'])
+        this.email$.next('')
+        return this.saveUserStorage(this.localSt, obs)
+      })
+    )
+  }
 
-  login(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
+  saveUserStorage(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
 
   logout(localSt: LocalStorageService) {
     localSt.clear('user')

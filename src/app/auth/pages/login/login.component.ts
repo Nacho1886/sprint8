@@ -35,13 +35,7 @@ export class LoginComponent {
     return this.showPasswordMessage ? this.userForm.controls['password'].errors : null
   }
 
-  loginUser() {
-    const password = this.userForm.get('password')!.value
-    this.authService.authPasswordUser(password).subscribe(obs => this.authService.login(this.localSt, obs))
-    this.router.navigate(['/home'])
-  }
-
   validateUserAccount() {
-    this.userForm.invalid ? this.showPasswordMessage = true : this.loginUser()
+    this.userForm.invalid ? this.showPasswordMessage = true : this.authService.loginUser(this.userForm).subscribe()
   }
 }

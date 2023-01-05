@@ -37,7 +37,7 @@ export class RegisterComponent {
 
   createUserAccount() {
     this.userForm.invalid ? this.userForm.markAllAsTouched()
-      : this.authService.createNewAccount(this.userForm)
+      : this.authService.createAndLogin(this.userForm)
   }
   
 
@@ -53,6 +53,5 @@ export class RegisterComponent {
     }
     return passwordConfirmControl.setErrors(errorsConfirmPassword())
   }
-
 }
 

@@ -4,19 +4,50 @@
       "id": "pepe@quimote.es",
       "name": "pepe",
       "lastname": "Pujol",
-      "password": "pepote"
+      "password": "pepote",
+      "offers": true
     },
     {
       "id": "francert@hotmail.com",
       "name": "Nacho",
       "lastname": "Marti",
-      "password": "Meda93"
+      "password": "Meda93",
+      "offers": false
     },
     {
       "id": "a@a.es",
       "name": "a",
       "lastname": "a",
-      "password": "Hola12"
+      "password": "Hola12",
+      "offers": false
+    },
+    {
+      "id": "b@b.es",
+      "name": "b",
+      "lastname": "b",
+      "password": "Adio12",
+      "offers": false
+    },
+    {
+      "id": "c@c.es",
+      "name": "c",
+      "lastname": "c",
+      "password": "Cccc12",
+      "offers": false
+    },
+    {
+      "id": "t@t.es",
+      "name": "t",
+      "lastname": "t",
+      "password": "Tttt12",
+      "offers": false
+    },
+    {
+      "id": "z@z.es",
+      "name": "z",
+      "lastname": "z",
+      "password": "Zzzz12",
+      "offers": false
     }
   ],
   "starshipsImage": [
