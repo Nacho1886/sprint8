@@ -1,6 +1,6 @@
-import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router, UrlSegment } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -9,12 +9,9 @@ import { PasswordValidatorService } from '../../services/password-validator.serv
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  @ViewChild('loginDialog') loginDialog!: ElementRef
 
   userForm: FormGroup
   
@@ -67,6 +64,4 @@ export class LoginComponent implements OnInit {
   validateUserAccount() {
     this.userForm.invalid ? this.showPasswordMessage = true : this.loginUser()
   }
-
-  closable(): void { this.router.navigate(['/home']) }
 }

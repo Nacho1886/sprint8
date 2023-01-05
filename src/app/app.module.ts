@@ -3,12 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import { NgxWebstorageModule, LocalStorageService } from 'ngx-webstorage';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './home/home.module';
-import { StarshipsModule } from './starships/starships.module';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -22,9 +20,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     AppRoutingModule,
-    SharedModule,
-    HomeModule,
-    StarshipsModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

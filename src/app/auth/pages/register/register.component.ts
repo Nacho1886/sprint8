@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
@@ -6,24 +6,18 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
 
-  @ViewChild('loginDialog') loginDialog!: ElementRef
-
-  email!: string
   userForm: FormGroup
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService
   ) {
-    this.email = this.authService.email$.getValue()
-
     this.userForm = this.fb.group({
-      email: [this.email, [Validators.required]],
+      email: [this.authService.email$.getValue(), [Validators.required]],
       name: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
       lastname: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.authService.passwordPattern)

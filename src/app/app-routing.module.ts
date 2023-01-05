@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'starships',
     loadChildren: () => import('./starships/starships.module').then((m) => m.StarshipsModule),
     canLoad: [AuthGuard],
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'home' },
 ];

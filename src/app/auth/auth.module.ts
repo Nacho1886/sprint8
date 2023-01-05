@@ -11,13 +11,17 @@ import { SharedModule } from '../shared/shared.module';
 import { PipesAuthModule } from './pipes/pipes-auth.module';
 import { EmailComponent } from './components/email/email.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AuthComponent } from './auth.component';
 
 
 
 @NgModule({
   declarations: [
+    AuthComponent,
     LoginComponent, 
-    RegisterComponent, EmailComponent, HeaderComponent
+    RegisterComponent,
+    EmailComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -28,8 +32,7 @@ import { HeaderComponent } from './components/header/header.component';
     PipesAuthModule
   ],
   exports: [
-    LoginComponent,
-    RegisterComponent
+    AuthComponent
   ]
 })
 export class AuthModule { }
