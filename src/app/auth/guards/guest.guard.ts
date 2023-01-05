@@ -15,7 +15,7 @@ export class GuestGuard implements CanLoad, CanActivate {
   ) { }
 
   isFalse() {
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/auth/email-adress'])
     return false
   }
 

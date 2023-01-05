@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
@@ -15,7 +15,7 @@ export class RegisterGuard implements CanActivate {
     ) { }
 
     isFalse() {
-      this.router.navigate(['/auth/login'])
+      this.router.navigate(['/auth/email-adress'])
       return false
     }
 

@@ -19,6 +19,6 @@ export class EmailComponent {
   }
   deleteEmail() {
     this.authService.email$.next('')
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/auth/email-adress'])
   }
 }

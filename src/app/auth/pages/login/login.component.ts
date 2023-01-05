@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,12 +11,10 @@ import { PasswordValidatorService } from '../../services/password-validator.serv
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   userForm: FormGroup
   
-  
-  accountDontExist: boolean = true
   showPasswordMessage: boolean = false
 
   constructor(
@@ -32,27 +30,9 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required], [this.passwordValidator]]
     })
   }
-  ngOnInit(): void {
-    this.authService.email$.subscribe(console.log)
-    this.userForm.get('email')?.valueChanges.subscribe(value => {
-      if (value !== value.toLowerCase().trim()) this.userForm.get('email')?.setValue(value.toLowerCase().trim())
-    })
-  }
-
-  isInvalidEmail(): ValidationErrors | null {
-    return this.userForm.get('email')?.touched ? this.userForm.controls['email'].errors : null
-  }
 
   isInvalidPassword(): ValidationErrors | null {
     return this.showPasswordMessage ? this.userForm.controls['password'].errors : null
-  }
-
-
-  validateUserId() {
-    const email = this.userForm.get('email')!
-    if (!this.userForm.controls['email'].errors) this.authService.validateExistEmail(email.value)
-    .subscribe(data => data ? this.accountDontExist = false : this.accountDontExist = true)
-    email.markAsTouched()
   }
 
   loginUser() {
