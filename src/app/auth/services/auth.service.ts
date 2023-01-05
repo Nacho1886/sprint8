@@ -81,5 +81,9 @@ export class AuthService {
 
   login(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
 
-  logout(localSt: LocalStorageService) { localSt.clear('user') }
+  logout(localSt: LocalStorageService) {
+    localSt.clear('user')
+    const firstPath = this.router.routerState.snapshot.root.firstChild?.url[0].path
+    if (firstPath === 'starships') this.router.navigate(['/home'])
+  }
 }

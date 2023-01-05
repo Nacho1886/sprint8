@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from 'ngx-webstorage';
