@@ -14,15 +14,14 @@ export class RegisterGuard implements CanActivate {
     private authService: AuthService
     ) { }
 
+    isFalse() {
+      this.router.navigate(['/auth/login'])
+      return false
+    }
+
     canActivate(): Observable<boolean> {
       return this.authService.email$.pipe(
-        map(emailExist => {
-          if (emailExist) {
-            return true;
-          }
-          this.router.navigate(['/auth/login']);
-          return false;
-        })
-      );
+        map(emailExist => emailExist ? true : this.isFalse())
+      )
     }
 }
