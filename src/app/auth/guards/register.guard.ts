@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router, CanActivate } from '@angular/router';
+import { Observable, map } from 'rxjs';
+
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterGuard implements CanActivateChild {
-
-  emailExist: string
+export class RegisterGuard implements CanActivate {
 
   constructor(
     private router: Router,
     private authService: AuthService
-    ) {
-      this.emailExist = this.authService.email$.getValue()
-      console.log("🚀 ~ file: register.guard.ts:18 ~ RegisterGuard ~ this.emailExist", this.emailExist)
-  }
+    ) { }
 
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.emailExist) return true
-      this.router.navigate(['/auth/login'])
-      return false
-  }
-  
+    canActivate(): Observable<boolean> {
+      return this.authService.email$.pipe(
+        map(emailExist => {
+          if (emailExist) {
+            return true;
+          }
+          this.router.navigate(['/auth/login']);
+          return false;
+        })
+      );
+    }
 }
