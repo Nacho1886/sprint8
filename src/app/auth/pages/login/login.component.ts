@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     const password = this.userForm.get('password')!.value
-    this.authService.validatePassword(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))
+    this.authService.authPasswordUser(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))
     this.router.navigate(['/home'])
   }
 

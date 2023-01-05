@@ -5,6 +5,18 @@
       "name": "pepe",
       "lastname": "Pujol",
       "password": "pepote"
+    },
+    {
+      "id": "francert@hotmail.com",
+      "name": "Nacho",
+      "lastname": "Marti",
+      "password": "Meda93"
+    },
+    {
+      "id": "a@a.es",
+      "name": "a",
+      "lastname": "a",
+      "password": "Hola12"
     }
   ],
   "starshipsImage": [

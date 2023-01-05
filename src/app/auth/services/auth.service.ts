@@ -49,6 +49,16 @@ export class AuthService {
     )
   }
 
+  authPasswordUser(email: string, password: string): Observable<User | undefined> {
+    return this.http.get<Account>(this._urlJsonServer + email).pipe(
+      map(user => {
+        if (user && user.password === password)
+          return { id: user.id, name: user.name, lastname: user.lastname }
+        return undefined
+      })
+    )
+  }
+
 
   createNewAccount(form: FormGroup) {
     const { email, name, lastname, password } = form.value
@@ -68,20 +78,8 @@ export class AuthService {
     })
   }
 
+
   login(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
 
   logout(localSt: LocalStorageService) { localSt.clear('user') }
-
-
-  validatePassword(email: string, password: string): Observable<User | undefined> {
-    return this.http.get<Account>(this._urlJsonServer + email).pipe(
-      map(user => {
-        if (user && user.password === password)
-          return { id: user.id, name: user.name, lastname: user.lastname }
-        return undefined
-      })
-    )
-  }
-
-  
 }

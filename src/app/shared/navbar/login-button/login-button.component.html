@@ -10,7 +10,7 @@
     <ng-container *ngIf="user | async; else login">
       
       <li class="option option2">
-        <a class="opt opt2 cursor-pointer" (click)="displayMenu()"><i (click)="logout(localSt)" class="pi pi-sign-out"></i></a>
+        <a class="opt opt2 cursor-pointer" (click)="logout()"><i class="pi pi-sign-out"></i></a>
         <li>
         </ng-container>
         <ng-template #login>

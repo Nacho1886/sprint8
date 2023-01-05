@@ -22,12 +22,15 @@ export class LoginButtonComponent implements OnInit {
     this.user = this.authService.user
     }
 
-  logout = this.authService.logout
+    displayMenu() {
+      this.mainBtn.nativeElement.classList.toggle("clickedMainBtn")
+      this.options.nativeElement.classList.toggle("displayOptions")
+    }
 
-  displayMenu() {
-    this.mainBtn.nativeElement.classList.toggle("clickedMainBtn")
-    this.options.nativeElement.classList.toggle("displayOptions")
-  }
+    logout() {
+      this.authService.logout(this.localSt)
+      this.displayMenu()
+    }
 
   ngOnInit(): void {
     document.addEventListener('click', (event) => {
