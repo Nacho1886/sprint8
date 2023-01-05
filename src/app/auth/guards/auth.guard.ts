@@ -7,54 +7,63 @@ import { User } from '../interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard implements CanLoad, CanActivate {
   
-  user!: Observable<User | undefined>
+  userExist: boolean = false
+
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
-    this.user = this.authService.user
-    this.user.subscribe(user => console.log(user))
+    this.authService.user.subscribe(obs =>
+      {obs ? this.userExist = true : this.userExist = false
+      console.log("🚀 ~ file: auth.guard.ts:21 ~ AuthGuard ~ this.userExist", this.userExist)
+      }
+      )
+    
   }
-  canActivate(): Observable<boolean> {
-    return this.user.pipe(
-      map(user => {
-        if (!user) {
-          this.router.navigate(['/auth/login']);
-          return false;
-        }
-        return true;
-      })
-    );
-  }
-
-  canLoad(): Observable<boolean> {
-    return this.user.pipe(
-      map(user => {
-        if (!user) {
-          this.router.navigate(['/auth/login']);
-          return false;
-        }
-        return true;
-      })
-    );
-  }
-  /* canActivate(): boolean {
-    let userExist: boolean = false
-    this.user.subscribe(user => {
-      if (user){ userExist = true}
-      else {this.router.navigate(['/auth/login'])}
-    })
-    console.log("🚀 ~ file: auth.guard.ts:24 ~ AuthGuard ~ canActivate ~ userExist", userExist)
-    return userExist
-  }
-
   canLoad(): boolean {
-    let userExist: boolean = false
+    if (this.userExist) return true
+    this.router.navigate(['/auth/login'])
+    return false
+  }
+  canActivate(): boolean {
+    if (this.userExist) return true
+    this.router.navigate(['/auth/login'])
+    return false
+  }
+}
+  
+  /* canActivate(): Observable<boolean> {
+    return this.user.pipe(
+      map(user => {
+        if (!user) {
+          this.router.navigate(['/auth/login']);
+          return false;
+        }
+        return true;
+      })
+    );
+  } */
+
+  /* canLoad(): Observable<boolean> {
+    return this.user.pipe(
+      map(user => {
+        if (!user) {
+          this.router.navigate(['/auth/login']);
+          return false;
+        }
+        return true;
+      })
+    );
+  } */
+  
+
+  /* canLoad(): boolean {
+    let userExist: boolean = true
     this.user.subscribe(user => {
-      if (user){ userExist = true}
+      if (!user){ userExist = false}
       else {this.router.navigate(['/auth/login'])}
     })
     return userExist
@@ -82,4 +91,3 @@ export class AuthGuard implements CanActivate, CanLoad {
       })
     )
   } */
-}
