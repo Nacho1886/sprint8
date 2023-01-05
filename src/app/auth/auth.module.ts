@@ -9,13 +9,15 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { PipesAuthModule } from './pipes/pipes-auth.module';
+import { EmailComponent } from './components/email/email.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent, 
-    RegisterComponent
+    RegisterComponent, EmailComponent, HeaderComponent
   ],
   imports: [
     CommonModule,

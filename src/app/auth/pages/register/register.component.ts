@@ -1,6 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators, AbstractControlOptions } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -19,7 +18,6 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private authService: AuthService
   ) {
     this.email = this.authService.email$.getValue()
@@ -50,7 +48,6 @@ export class RegisterComponent {
   
 
   validatorConfirmPassword(form: AbstractControl) {
-    
     const passwordControl = form.get('password')!;
     const passwordConfirmControl = form.get('passwordConfirm')!;
     const areDiferrent = passwordControl.value !== passwordConfirmControl.value
@@ -60,10 +57,8 @@ export class RegisterComponent {
         : passwordConfirmControl.value === ''
           ? { required: true } : null
     }
-
     return passwordConfirmControl.setErrors(errorsConfirmPassword())
   }
 
-  closable(): void { this.router.navigate(['/home']) }
 }
 

@@ -1,16 +1,9 @@
 <div #loginDialog>
     <p-dialog [visible]="true" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false" [dismissableMask]="true">
-        <p-header>
-            <div class="grid">
-                <div class="col-offset-2 col-8">
-                    <img class="w-12 mt-3 mb-5" src="../../../../../assets/img/login-logo.png" alt="login-logo">
-                </div>
-                <div class="col-2 flex justify-content-end"><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text" (click)="closable()"></button></div>
-            </div>
-        </p-header>
+        <app-header></app-header>
         <div>
             <span class="flex justify-content-center spanText">CREATE YOUR ACCOUNT</span>
-            <p>{{email}}</p>
+            <app-email></app-email>
             <form [formGroup]="userForm" (ngSubmit)="createUserAccount()" class="grid mt-4 gap-3">
                 <input class="col-12" [style.borderColor]="isInvalidField('name') ? 'red' : null"
                 type="text" placeholder="First Name" formControlName="name">
@@ -36,8 +29,5 @@
                 class="w-full p-button-raised p-button-secondary p-button-text"></button>
             </form>
         </div>
-        <p>{{userForm.valid| json}}</p>
-        <p>{{userForm.controls['password'].errors | json}}</p>
-        <p>{{userForm.controls['passwordConfirm'].errors | json}}</p>
     </p-dialog>
 </div>

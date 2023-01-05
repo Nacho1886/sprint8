@@ -8,13 +8,13 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterGuard implements CanActivateChild {
 
-  emailExist!: string
+  emailExist: string
 
   constructor(
     private router: Router,
     private authService: AuthService
     ) {
-      this.authService.email.subscribe(email => this.emailExist = email)
+      this.emailExist = this.authService.email$.getValue()
       console.log("🚀 ~ file: register.guard.ts:18 ~ RegisterGuard ~ this.emailExist", this.emailExist)
   }
 

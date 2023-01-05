@@ -1,13 +1,6 @@
 <div #loginDialog>
     <p-dialog [visible]="true" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false" [dismissableMask]="true">
-        <p-header>
-            <div class="grid">
-                <div class="col-offset-2 col-8">
-                    <img class="w-12 mt-3 mb-5" src="../../../../../assets/img/login-logo.png" alt="login-logo">
-                </div>
-                <div class="col-2 flex justify-content-end"><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text" (click)="closable()"></button></div>
-            </div>
-        </p-header>
+        <app-header></app-header>
         <ng-container *ngIf="accountDontExist; else idIsCorrect">
             <span class="spanText">ENTER YOUR EMAIL ADDRESS</span>
             <form [formGroup]="userForm" (ngSubmit)="validateUserId()" class="grid mt-4 gap-3">
@@ -22,7 +15,7 @@
         </ng-container>
         <ng-template #idIsCorrect>
             <span class="flex justify-content-center spanText">ENTER YOUR PASSWORD</span>
-            <p>{{email}}</p>
+            <app-email></app-email>
             <form [formGroup]="userForm" (ngSubmit)="validateUserAccount()" class="grid mt-4 gap-3">
                 <input class="col-12" [style.borderColor]="isInvalidPassword() ? 'red' : null" 
                 (keydown)="showPasswordMessage = false; $event.stopPropagation()"

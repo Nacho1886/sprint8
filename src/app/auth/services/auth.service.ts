@@ -49,7 +49,10 @@ export class AuthService {
     )
   }
 
-  authPasswordUser(email: string, password: string): Observable<User | undefined> {
+  authPasswordUser(password: string): Observable<User | undefined> {
+    
+    const email: string = this.email$.getValue()
+
     return this.http.get<Account>(this._urlJsonServer + email).pipe(
       map(user => {
         if (user && user.password === password)
@@ -78,6 +81,9 @@ export class AuthService {
     })
   }
 
+  deleteEmail() {
+    this.email$.next('')
+  }
 
   login(localSt: LocalStorageService, user: User | undefined) { localSt.store('user', user) }
 

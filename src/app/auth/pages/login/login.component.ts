@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   userForm: FormGroup
   
-  email: string | undefined
+  
   accountDontExist: boolean = true
   showPasswordMessage: boolean = false
 
@@ -29,14 +29,14 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private passwordValidator: PasswordValidatorService
   ) {
-    this.authService.email$.subscribe(obs => this.email = obs)
-
+    
     this.userForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.authService.emailPattern)]],
       password: ['', [Validators.required], [this.passwordValidator]]
     })
   }
   ngOnInit(): void {
+    this.authService.email$.subscribe(console.log)
     this.userForm.get('email')?.valueChanges.subscribe(value => {
       if (value !== value.toLowerCase().trim()) this.userForm.get('email')?.setValue(value.toLowerCase().trim())
     })
@@ -60,14 +60,13 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     const password = this.userForm.get('password')!.value
-    this.authService.authPasswordUser(this.email!, password).subscribe(obs => this.authService.login(this.localSt, obs))
+    this.authService.authPasswordUser(password).subscribe(obs => this.authService.login(this.localSt, obs))
     this.router.navigate(['/home'])
   }
 
   validateUserAccount() {
     this.userForm.invalid ? this.showPasswordMessage = true : this.loginUser()
   }
-
 
   closable(): void { this.router.navigate(['/home']) }
 }
