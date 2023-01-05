@@ -1,0 +1,12 @@
+<div>
+    <span class="spanText">ENTER YOUR EMAIL ADDRESS</span>
+    <form [formGroup]="userForm" (ngSubmit)="validateUserId()" class="grid mt-4 gap-3">
+        <input class="col-12" [style.borderColor]="isInvalidEmail() ? 'red' : null" type="email"
+            placeholder="Email Address" formControlName="email">
+        <div [style.color]="isInvalidEmail() ? 'red' : 'green'" *ngIf="isInvalidEmail()">
+            {{ isInvalidEmail() | emailLoginError }}
+        </div>
+        <button class="col-12" pButton pRipple label="Continue"
+            class="w-full p-button-raised p-button-secondary p-button-text"></button>
+    </form>
+</div>

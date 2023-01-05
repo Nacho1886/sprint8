@@ -12,6 +12,7 @@ import { PipesAuthModule } from './pipes/pipes-auth.module';
 import { EmailComponent } from './components/email/email.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthComponent } from './auth.component';
+import { EmailAdressComponent } from './pages/email-adress/email-adress.component';
 
 
 
@@ -21,7 +22,8 @@ import { AuthComponent } from './auth.component';
     LoginComponent, 
     RegisterComponent,
     EmailComponent,
-    HeaderComponent
+    HeaderComponent,
+    EmailAdressComponent
   ],
   imports: [
     CommonModule,

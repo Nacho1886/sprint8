@@ -1,0 +1,34 @@
+
+.spanText {
+    color: #edd700;
+    letter-spacing: 1.536px;
+    font-size: 25.6px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+input {
+    color: #edd700;
+    border-radius: 3px !important;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    border: 1px solid #d8dee8;
+    background: #757575;
+    outline: none;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%) !important;
+    font-size: 15px;
+    letter-spacing: 0.792px;
+    padding: 0 15px !important;
+
+}
+
+input:focus {
+    background-color: #484848;
+    border: 1px solid #edd700 !important;
+    outline: none !important;
+    line-height: 40px;
+}
+
