@@ -21,6 +21,26 @@
     <div style="color: 'red'" *ngIf="isInvalidField('passwordConfirm')">
         {{ isInvalidField('passwordConfirm') | passwordRegisterError }}
     </div>
+
+    <label data-testid="checkbox-show-pw-wrapper" class="input-checkbox show-password-checkbox"
+        for="checkbox-show-pw"><input type="checkbox" tabindex="0" id="checkbox-show-pw" data-testid="checkbox-show-pw"
+            aria-label="Show password" aria-required="false" aria-invalid="false" aria-describedby="password-new">
+        <p class="checkbox-text" data-testid="checkbox-show-pw-text">Show password</p>
+    </label>
+
+    <label class="input-checkbox newsletter-checkbox">
+        <input type="checkbox" tabindex="0" formControlName="offers">
+        <p class="checkbox-text">Yes! I would like to receive by email special offers
+            and updates about Lucasfilm Ltd. and other products and services from
+            <a href="https://privacy.thewaltdisneycompany.com/en/definitions/#The-Walt-Disney-Family-of-Companies">
+                The Walt Disney Family of Companies</a>.
+        </p>
+    </label>
+
     <button class="col-12" pButton pRipple type="submit" label="Sign In"
         class="w-full p-button-raised p-button-secondary p-button-text"></button>
+
+    <p class="text-center col-12 m-0">Already have an account?
+        <a routerLink="/auth/login">Sign In</a>
+    </p>
 </form>

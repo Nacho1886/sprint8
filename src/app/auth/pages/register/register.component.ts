@@ -53,5 +53,7 @@ export class RegisterComponent {
     }
     return passwordConfirmControl.setErrors(errorsConfirmPassword())
   }
+
+  showPassword() {}
 }
 

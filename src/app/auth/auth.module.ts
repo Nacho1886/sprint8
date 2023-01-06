@@ -13,6 +13,8 @@ import { EmailComponent } from './components/email/email.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthComponent } from './auth.component';
 import { EmailAdressComponent } from './pages/email-adress/email-adress.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { RegionComponent } from './components/region/region.component';
 
 
 
@@ -23,7 +25,9 @@ import { EmailAdressComponent } from './pages/email-adress/email-adress.componen
     RegisterComponent,
     EmailComponent,
     HeaderComponent,
-    EmailAdressComponent
+    EmailAdressComponent,
+    PrivacyPolicyComponent,
+    RegionComponent
   ],
   imports: [
     CommonModule,

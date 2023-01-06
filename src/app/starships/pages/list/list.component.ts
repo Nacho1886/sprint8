@@ -7,14 +7,14 @@ import { BehaviorSubject, concatMap } from 'rxjs';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
   starshipsSubject = new BehaviorSubject<Starship[]>([])
   page$: BehaviorSubject<number> = new BehaviorSubject(1)
 
-  isLoading: boolean = true;
-  loadIsNotCompleted: boolean = true;
+  isLoading: boolean = true
+  loadIsNotCompleted: boolean = true
 
   constructor(
     private apiRequestsService: ApiRequestsService,

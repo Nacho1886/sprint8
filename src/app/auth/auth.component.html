@@ -1,6 +1,8 @@
 <div #loginDialog>
     <p-dialog [visible]="true" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false" [dismissableMask]="true">
-        <app-header></app-header>
+        <p-header>
+            <app-header></app-header>
+        </p-header>
         <router-outlet></router-outlet>
     </p-dialog>
 </div>

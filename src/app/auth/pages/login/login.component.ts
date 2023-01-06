@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import { LocalStorageService } from 'ngx-webstorage';
 import { PasswordValidatorService } from '../../services/password-validator.service';
 
 @Component({
@@ -19,8 +17,6 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private localSt: LocalStorageService,
     private authService: AuthService,
     private passwordValidator: PasswordValidatorService
   ) {
