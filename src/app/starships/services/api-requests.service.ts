@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { StarshipsPage } from '../pages/starships-page';
 import { Starship } from '../interfaces/starship';
@@ -12,17 +12,16 @@ import { Pilot } from '../interfaces/pilot';
   providedIn: 'root',
 })
 export class ApiRequestsService {
-  urlStarshipsApi:        string = 'https://swapi.dev/api/starships/';
-  urlImagesStarshipsApi:  string = 'https://starwars-visualguide.com/assets/img/starships/';
-  urlJsonServer:  string = 'http://localhost:3000/starshipsImage/';
-  page: number = 1;
+  urlStarshipsApi:        string = 'https://swapi.dev/api/starships/'
+  urlImagesStarshipsApi:  string = 'https://starwars-visualguide.com/assets/img/starships/'
+  urlJsonServer:  string = 'http://localhost:3000/starshipsImage/'
 
   constructor(private http: HttpClient) {}
 
-  getStarshipsPageApi(): Observable<StarshipsPage> {
+  getStarshipsPageApi(page: number): Observable<StarshipsPage> {
     return this.http.get<StarshipsPage>(
-      this.urlStarshipsApi + '?page=' + this.page
-    );
+      this.urlStarshipsApi + '?page=' + page
+    )
   }
 
   getStarshipApi(id: string): Observable<Starship> {

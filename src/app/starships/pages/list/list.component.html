@@ -1,10 +1,13 @@
-<ng-container *ngIf="starshipsArray; else loading">
+<div *ngIf="(starshipsSubject | async)!.length > 0; else loading">
     <div class="grid m-2">
-        <div class="col-12 md:col-6 lg:col-3" *ngFor="let starship of starshipsArray">
+        <div class="col-12 md:col-6 lg:col-3" *ngFor="let starship of starshipsSubject | async">
             <app-starship-card [starship]="starship" (click)="getStarship(starship.url)"></app-starship-card>
         </div>
+        <div class="col-12 flex justify-content-center">
+            <app-loading [showClasses]="false" *ngIf="isLoading && loadIsNotCompleted"></app-loading>
+        </div>
     </div>
-</ng-container>
+</div>
 <ng-template #loading>
     <app-loading></app-loading>
 </ng-template>

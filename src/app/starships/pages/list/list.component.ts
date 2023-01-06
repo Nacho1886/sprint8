@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiRequestsService } from '../../services/api-requests.service';
 import { Starship } from '../../interfaces/starship';
+import { BehaviorSubject, concatMap } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -9,16 +10,37 @@ import { Starship } from '../../interfaces/starship';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  starshipsArray!: Starship[];
+  starshipsSubject = new BehaviorSubject<Starship[]>([])
+  page$: BehaviorSubject<number> = new BehaviorSubject(1)
+
+  isLoading: boolean = true;
+  loadIsNotCompleted: boolean = true;
 
   constructor(
     private apiRequestsService: ApiRequestsService,
     private router: Router
   ) {
-    this.apiRequestsService
-      .getStarshipsPageApi()
-      .subscribe((page) => (this.starshipsArray = page.results));
+    this.page$.pipe(
+      concatMap(page => this.apiRequestsService.getStarshipsPageApi(page))
+    ).subscribe(page => {
+      this.starshipsSubject.next(
+        this.starshipsSubject.getValue().concat(page.results)
+      )
+      if (page.next === null) {
+        this.page$.complete()
+        this.loadIsNotCompleted = false
+      }
+      this.isLoading = false
+    })
   }
+
+  @HostListener('window:scroll') onScroll() {
+    if ((window.innerHeight + window.scrollY >= document.body.offsetHeight) && !this.isLoading) {
+      this.isLoading = true
+      this.page$.next(this.page$.value + 1)
+    }
+  }
+
 
   getStarship(urlString: string) {
     const urlArray = urlString.split('/').reverse().filter(e => e)
