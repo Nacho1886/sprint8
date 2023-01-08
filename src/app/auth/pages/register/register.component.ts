@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
@@ -9,8 +9,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-
+  
   userForm: FormGroup
+
+  showPassword: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -53,7 +55,5 @@ export class RegisterComponent {
     }
     return passwordConfirmControl.setErrors(errorsConfirmPassword())
   }
-
-  showPassword() {}
-}
+} 
 

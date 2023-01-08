@@ -7,10 +7,12 @@ import { ValidationErrors } from '@angular/forms';
 export class PasswordLoginErrorPipe implements PipeTransform {
 
   transform(errors: ValidationErrors | null): string | void {
-    if (errors)
-      return errors['incorrectPassword']
-        ? "The credentials you entered are incorrect. Reminder: passwords are case sensitive."
-        : 'Required'
+    if (errors){
+       if (errors['incorrectPassword'])
+        return "The credentials you entered are incorrect. Reminder: passwords are case sensitive."
+       if (errors['accountDontExist'])
+        return "account"
+        return 'Required'}
   }
 
 }
