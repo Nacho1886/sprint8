@@ -22,8 +22,8 @@ export class RegisterComponent {
       email: [this.authService.email$.getValue(), [Validators.required]],
       name: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
       lastname: ['', [Validators.required, Validators.pattern(this.authService.namePattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.authService.passwordPattern)
-      ]],
+      password: ['', [Validators.required, Validators.minLength(6),
+        Validators.pattern(this.authService.passwordPattern)]],
       passwordConfirm: [''],
       offers: [false]
     }
