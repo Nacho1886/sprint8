@@ -1,6 +1,6 @@
 <div *ngIf="(starshipsSubject | async)!.length > 0; else loading">
-    <div class="grid m-2">
-        <div class="col-12 md:col-6 lg:col-3" *ngFor="let starship of starshipsSubject | async">
+    <div class="grid justify-content-center m-2">
+        <div class="col-10 md:col-5" *ngFor="let starship of starshipsSubject | async">
             <app-starship-card [starship]="starship" (click)="getStarship(starship.url)"></app-starship-card>
         </div>
         <div class="col-12 flex justify-content-center">
