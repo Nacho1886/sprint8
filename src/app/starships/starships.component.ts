@@ -5,7 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss']
 })
-export class StarshipsComponent {
-
-  constructor() { }
-}
+export class StarshipsComponent { }
