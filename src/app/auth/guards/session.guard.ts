@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
-import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuestGuard implements CanLoad, CanActivate {
+export class SessionGuard implements CanLoad, CanActivate {
 
   constructor(
     private authService: AuthService,
@@ -19,14 +19,23 @@ export class GuestGuard implements CanLoad, CanActivate {
     return false
   }
 
+  isTrue() {
+    this.router.navigate(['/starships'])
+    return false
+  }
+  isValid() {
+    this.router.navigate(['/starships'])
+    return true
+  }
+
   canLoad(): Observable<boolean> {
     return this.authService.user.pipe(
-      map(userExist => userExist ? true : this.isFalse())
+      map(userExist => userExist ? this.isTrue() : this.isFalse())
     )
   }
   canActivate(): Observable<boolean> {
     return this.authService.user.pipe(
-      map(userExist => userExist ? true : this.isFalse())
+      map(userExist => userExist ? this.isTrue() : this.isFalse())
     )
   }
 }

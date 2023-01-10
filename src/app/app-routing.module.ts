@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { GuestGuard } from './auth/guards/guest.guard';
-import { UserGuard } from './auth/guards/user.guard';
+import { SessionGuard } from './auth/guards/session.guard';
 
 const routes: Routes = [
   {
@@ -12,14 +11,14 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    canLoad: [UserGuard],
-    canActivate: [UserGuard]
+    canLoad: [SessionGuard],
+    canActivate: [SessionGuard]
   },
   {
     path: 'starships',
     loadChildren: () => import('./starships/starships.module').then((m) => m.StarshipsModule),
-    canLoad: [GuestGuard],
-    canActivate: [GuestGuard]
+    canLoad: [SessionGuard],
+    canActivate: [SessionGuard]
   },
   { path: '**', redirectTo: 'home' },
 ];
