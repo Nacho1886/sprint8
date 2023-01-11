@@ -4,7 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthComponent } from './auth.component';
 import { EmailAdressComponent } from './pages/email-adress/email-adress.component';
-import { AuthGuard } from './guards/auth.guard';
+import { EmailGuard } from './guards/email.guard';
 
 const routes: Routes = [
   {
@@ -15,12 +15,12 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
-        canActivate: [AuthGuard]
+        canActivate: [EmailGuard]
       },
       {
         path: 'register',
         component: RegisterComponent,
-        canActivate: [AuthGuard]
+        canActivate: [EmailGuard]
       },
       { path: '**', redirectTo: 'email-adress' }
     ]

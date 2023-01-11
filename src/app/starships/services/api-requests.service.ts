@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { StarshipsPage } from '../pages/starships-page';
+import { StarshipsPage } from '../interfaces/starships-page';
 import { Starship } from '../interfaces/starship';
 import { StarshipImage } from '../interfaces/starship-image';
 import { Film } from '../interfaces/film';

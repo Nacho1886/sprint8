@@ -6,8 +6,10 @@ import { FormGroup, ValidationErrors } from '@angular/forms';
 })
 export class NameRegisterErrorPipe implements PipeTransform {
 
-  transform(errors: ValidationErrors | null, input: string): string | void {
+  transform(errors: ValidationErrors | null, input: string): string | null {
+    
     if (errors) return errors['pattern'] ? `Please enter your ${input}.` : 'Required'
-  }
 
+    return errors
+  }
 }

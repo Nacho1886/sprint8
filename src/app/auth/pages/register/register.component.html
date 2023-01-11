@@ -15,7 +15,17 @@
         [type]="showPassword ? 'text' : 'password'" 
         placeholder="Password" formControlName="password">
     <div style="color: 'red'" *ngIf="isInvalidField('password')">
-        {{ isInvalidField('password') | passwordRegisterError }}
+        <div *ngFor="let error of isInvalidField('password') | passwordRegisterError as errors">
+            <ng-container *ngIf="errors.length > 1; else oneError">
+                <ul >
+                    <li>{{error}}</li>
+                </ul>
+            </ng-container>
+            <ng-template #oneError>
+                {{error}}
+            </ng-template>
+        </div>
+        
     </div>
     <input class="col-12" [style.borderColor]="isInvalidField('passwordConfirm') ? 'red' : null"
         [type]="showPassword ? 'text' : 'password'" 

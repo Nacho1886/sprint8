@@ -1,4 +1,4 @@
-import { Starship } from '../interfaces/starship';
+import { Starship } from './starship';
 
 
 export interface StarshipsPage {

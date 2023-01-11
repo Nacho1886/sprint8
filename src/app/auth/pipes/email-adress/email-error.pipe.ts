@@ -6,7 +6,10 @@ import { ValidationErrors } from '@angular/forms';
 })
 export class EmailErrorPipe implements PipeTransform {
 
-  transform(errors: ValidationErrors | null): string | void {
+  transform(errors: ValidationErrors | null): string | null {
+
     if (errors) return errors['pattern'] ? 'Please enter a valid email address.' : 'Required'
+
+    return errors
   }
 }

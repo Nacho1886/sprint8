@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Starship } from '../../../../interfaces/starship';
 import { StarshipImage } from '../../../../interfaces/starship-image';
 import { Film } from '../../../../interfaces/film';

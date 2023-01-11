@@ -1,7 +1,10 @@
-.p-element {
-    width: 70vw;
-    max-width: 500px;
-}
-.p-dialog-content {
-    overflow-y: hidden !important
+
+.authCard {
+    .p-element {
+        max-width: 500px;
+    }
+    .p-dialog-content {
+        overflow-y: hidden !important
+    }
+
 }
