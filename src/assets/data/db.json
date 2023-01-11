@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "a@a.es",
+      "name": "a",
+      "lastname": "a",
+      "password": "Hola12",
+      "offers": false
+    }
+  ],
   "starshipsImage": [
     {
       "id": 2,
