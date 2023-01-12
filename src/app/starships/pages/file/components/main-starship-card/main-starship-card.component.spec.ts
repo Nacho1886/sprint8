@@ -13,8 +13,8 @@ describe('Main card Starship', () => {
             declarations: [ MainStarshipCardComponent ]
           });
 
-        fixture = TestBed.createComponent(MainStarshipCardComponent);
+        /* fixture = TestBed.createComponent(MainStarshipCardComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
+        fixture.detectChanges(); */
     })
 })

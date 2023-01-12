@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'roman'
 })
-export class romanPipe implements PipeTransform {
+export class RomanPipe implements PipeTransform {
 
   transform(num: number) {
     if (isNaN(num)) return NaN;
